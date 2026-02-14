@@ -123,6 +123,9 @@ tests = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --co
 tests-u = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=40 tests/unit"
 tests-i = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=70 tests/integration"
 
+[tool.pixi.feature.doc.tasks]
+python-docs = { cmd = "make clean html", cwd = "docs", env = { SPHINXOPTS = "--fail-on-warning --keep-going --nitpicky" }}
+
 [tool.pixi.feature.build.tasks]
 build-wheels = { cmd = "uv build --sdist --wheel --out-dir dist/ ." }
 check-wheels = { cmd = ["twine", "check", "dist/*"], depends-on = ["build-wheels"] }
