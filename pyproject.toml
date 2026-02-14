@@ -54,7 +54,7 @@ dependencies = [
 dev = [
   "jupyter>=1.1.1,<2",
   "pipreqs>=0.4.13,<0.5",
-  "ruff>=0.14.5,<0.15",
+  "ruff>=0.14.14,<0.15",
   "ruff-lsp>=0.0.62,<0.0.63",
 ]
 test = [
@@ -114,6 +114,10 @@ build = { features = ["default", "build"], solve-group = "dev" }
 [tool.pixi.tasks]
 geo-demo = { cmd = "reVReports maps -c config_geo.json -o ../../", cwd = "tests/data"}
 
+[tool.pixi.feature.dev.tasks]
+lint = "ruff check ./reVReports"
+format = "ruff format ./reVReports"
+
 [tool.pixi.feature.test.tasks]
 tests = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=85 tests/"
 tests-u = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=40 tests/unit"
@@ -147,7 +151,7 @@ reVReports = { path = ".", editable = true }
 ipykernel = ">=7.1.0,<8"
 jupyter = ">=1.1.1,<2"
 pipreqs = ">=0.4.13,<0.5"
-ruff = ">=0.14.5,<0.15"
+ruff = ">=0.14.14,<0.15"
 ruff-lsp = ">=0.0.62,<0.0.63"
 
 [tool.pixi.feature.test.dependencies]
@@ -240,6 +244,7 @@ ignore = [
   "PYI024", # collections-named-tuple
   "RUF012", # mutable-class-default
   "RUF031", # incorrectly-parenthesized-tuple-in-subscript
+  "RUF067", # non-empty-init-module
   "S101", # assert
   "S324", # hashlib-insecure-hash-function
   "S403", # suspicious-pickle-import
@@ -332,3 +337,4 @@ testpaths = [
   "tests/unit",
   "tests/integration",
 ]
+markers = "skip_ci: marks test as one that should not be run on Github Workflows"
