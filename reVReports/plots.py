@@ -141,8 +141,8 @@ class PlotGenerator:
         dpi : int, default=300
             Resolution used when saving matplotlib figures.
         prefix_outputs : bool, default=False
-            If True, output plot filenames are prefixed with 'plot_'.
-            By default, ``False``.
+            If True, output plot filenames are prefixed with
+            ``'plot_'``. By default, ``False``.
         """
         self._plot_data = plot_data
         self._config = plot_data.config

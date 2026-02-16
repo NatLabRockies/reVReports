@@ -245,7 +245,7 @@ def format_graph(  # noqa: PLR0913, PLR0917
     ymin : float, optional
         Minimum y-value to display. By default None, which will have no
         effect on the graph.
-    ymax : _type_, optional
+    ymax : float, optional
         Maximum y-value to display. By default None, which will have no
         effect on the graph.
     xlabel : str, optional

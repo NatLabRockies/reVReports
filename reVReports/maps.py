@@ -128,7 +128,7 @@ class BaseMapGenerator(ABC):
         point_size : float, optional
             Marker size for scenario points, by default 2.0.
         prefix_outputs : bool, optional
-            Whether to prefix output filenames with 'map_',
+            Whether to prefix output filenames with ``'map_'``,
             by default ``False``.
         """
         figsize = (max(13, 6.5 * self.n_cols), 4 * self.n_rows)
