@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Docs
         run: |
-          pixi reinstall -e dev NLR-GAPs
+          pixi reinstall -e dev reVReports
           pixi run -e dev python-docs
 
       - name: deploy
