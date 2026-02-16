@@ -7,15 +7,15 @@ type: software
 authors:
   - family-names: Gleason
     given-names: Michael
-    affiliation: National Renewable Energy Laboratory
+    affiliation: National Laboratory of the Rockies
     orcid: 'https://orcid.org/0009-0003-5916-6726'
   - family-names: Pinchuk
     given-names: Pavlo
-    affiliation: National Renewable Energy Laboratory
+    affiliation: National Laboratory of the Rockies
     orcid: 'https://orcid.org/0000-0003-4736-4728'
   - family-names: Lopez
     given-names: Anthony
-    affiliation: National Renewable Energy Laboratory
+    affiliation: National Laboratory of the Rockies
     orcid: 'https://orcid.org/0000-0002-5006-1675'
 identifiers:
   - type: doi
