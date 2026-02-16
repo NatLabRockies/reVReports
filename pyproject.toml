@@ -12,13 +12,13 @@ dynamic = ["version"]
 description = "For creating standardized graphics to summarize/report outputs from reV supply curves."
 readme = "README.rst"
 authors = [
-  {name = "Michael Gleason", email = "mike.gleason@nrel.gov"},
+  {name = "Michael Gleason", email = "mike.gleason@nlr.gov"},
 ]
 maintainers = [
-  {name = "Pavlo Pinchuk", email = "ppinchuk@nrel.gov"},
+  {name = "Pavlo Pinchuk", email = "ppinchuk@nlr.gov"},
 ]
 license = "BSD-3-Clause"
-keywords = ["reVReports", "NREL", "Supply Curve", "Visualization", "Graphics"]
+keywords = ["reVReports", "NatLabRockies", "Supply Curve", "Visualization", "Graphics"]
 requires-python = ">= 3.10"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -39,7 +39,7 @@ dependencies = [
     "geoplot>=0.5.1,<1",
     "imagehash>=4.3.2,<5",
     "matplotlib>=3.10.8,<4",
-    "nrel-gaps>=0.8.11,<0.9",
+    "nlr-gaps>=0.9.0,<0.10",
     "numpy>=2.3.5,<3",
     "pandas>=2.3.3,<3",
     "pydantic>=2.12.4,<3",
@@ -79,16 +79,15 @@ doc = [
 build = [
   "build>=1.3.0,<2",
   "pkginfo>=1.12.1.2,<2",
-  "twine>=6.2.0,<7",
 ]
 
 [project.scripts]
 reVReports = "reVReports.cli:main"
 
 [project.urls]
-homepage = "https://github.com/NREL/reVReports"
-documentation = "https://nrel.github.io/reVReports/"
-repository = "https://github.com/NREL/reVReports"
+homepage = "https://github.com/NatLabRockies/reVReports"
+documentation = "https://natlabrockies.github.io/reVReports/"
+repository = "https://github.com/NatLabRockies/reVReports"
 
 
 [tool.setuptools.packages]
@@ -127,9 +126,7 @@ tests-i = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --
 python-docs = { cmd = "make clean html", cwd = "docs", env = { SPHINXOPTS = "--fail-on-warning --keep-going --nitpicky" }}
 
 [tool.pixi.feature.build.tasks]
-build-wheels = { cmd = "uv build --sdist --wheel --out-dir dist/ ." }
-check-wheels = { cmd = ["twine", "check", "dist/*"], depends-on = ["build-wheels"] }
-upload-wheels = { cmd = ["twine", "upload", "dist/*"], depends-on = ["check-wheels"] }
+build-wheels = "uv build --sdist --wheel --out-dir dist/ ."
 
 [tool.pixi.dependencies]
 cartopy = ">=0.25.0,<0.26"
@@ -180,7 +177,6 @@ sphinxcontrib-mermaid = ">=1.0.0,<2"
 [tool.pixi.feature.build.dependencies]
 python-build = ">=1.3.0,<2"
 pkginfo = ">=1.12.1.2,<2"
-twine = ">=6.2.0,<7"
 uv = ">=0.9.10,<0.10"
 
 

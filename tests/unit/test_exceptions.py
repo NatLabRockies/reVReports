@@ -1,7 +1,7 @@
 """Test reVReports exception types
 
 Most exception logic + tests pulled from GAPs
-(https://github.com/NREL/gaps)
+(https://github.com/NatLabRockies/gaps)
 """
 
 from pathlib import Path

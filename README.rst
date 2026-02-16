@@ -19,7 +19,7 @@ reVReports
 .. |Pixi| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json
     :target: https://pixi.sh
 
-.. |SWR| image:: https://img.shields.io/badge/SWR--25--29_-blue?label=NREL
+.. |SWR| image:: https://img.shields.io/badge/SWR--25--29_-blue?label=NLR
     :alt: Static Badge
 
 .. |Zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.17633670.svg
@@ -45,10 +45,10 @@ If you would like to install and run reVReports from source, we recommend using 
 
 .. code-block:: bash
 
-    git clone git@github.com:NREL/reVReports.git; cd reVReports
+    git clone git@github.com:NatLabRockies/reVReports.git; cd reVReports
     pixi run reVReports
 
-For detailed instructions, see the `installation documentation <https://nrel.github.io/reVReports/misc/installation.html>`_.
+For detailed instructions, see the `installation documentation <https://natlabrockies.github.io/reVReports/misc/installation.html>`_.
 
 
 Quickstart
@@ -62,10 +62,10 @@ To run a quick reVReports demo, use:
 This will generate sample map outputs using example reV geothermal supply curve outputs.
 
 For more information on running ``reVReports``, see
-`Usage <https://github.com/NREL/reVReports/blob/main/USAGE.md>`_.
+`Usage <https://github.com/NatLabRockies/reVReports/blob/main/USAGE.md>`_.
 
 
 Development
 ===========
-Please see the `Development Guidelines <https://nrel.github.io/reVReports/dev/index.html>`_
+Please see the `Development Guidelines <https://natlabrockies.github.io/reVReports/dev/index.html>`_
 if you wish to contribute code to this repository.

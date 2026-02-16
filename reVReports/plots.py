@@ -325,9 +325,9 @@ class PlotGenerator:
         """Create bar chart of economic capacity by region"""
         logger.info("Plotting capacity by region and scenario barchart")
         # Regional capacity comparison
-        # Sum the capacity by nrel region
+        # Sum the capacity by nlr region
         region_col = (
-            "offtake_state" if self._config.tech == "osw" else "nrel_region"
+            "offtake_state" if self._config.tech == "osw" else "nlr_region"
         )
         econ_cap_by_region_df = (
             self.all_df[
@@ -732,7 +732,7 @@ class PlotGenerator:
         """Create regional box plots for key metrics"""
         logger.info("Plotting regional box plots")
         region_col = (
-            "offtake_state" if self._config.tech == "osw" else "nrel_region"
+            "offtake_state" if self._config.tech == "osw" else "nlr_region"
         )
         reg_box_vars = [
             {
