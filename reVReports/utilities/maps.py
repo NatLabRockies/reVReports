@@ -21,12 +21,12 @@ class YBFixedBounds(np.ndarray):
     """Helper class for use with a map classify classifier
 
     This class can used to overwrite the ``yb`` property of a classifier
-    so that the .max() and .min() methods return preset values rather
-    than the maximum and minimum break labels corresponding to the range
-    of data.
+    so that the ``.max()`` and ``.min()`` methods return preset values
+    rather than the maximum and minimum break labels corresponding to
+    the range of data.
 
-    This is used in map_supply_curve_column() to ensure that breaks and
-    colors shown in the legend are always consistent with the input
+    This is used in ``map_supply_curve_column()`` to ensure that breaks
+    and colors shown in the legend are always consistent with the input
     ``breaks`` rather than subject to change based on range of the input
     ``column``.
     """
@@ -151,7 +151,7 @@ def map_geodataframe_column(  # noqa: PLR0913, PLR0917
         extent.
     column : str
         Name of the column in ``data_df`` to plot.
-    color_map : [str, matplotlib.colors.Colormap], optional
+    color_map : str or matplotlib.colors.Colormap, default="viridis"
         Colors to use for mapping the values of ``column``. This can
         either be the name of a colormap or an actual colormap instance.
         By default, the color_map will be ``"viridis"``.
@@ -192,13 +192,13 @@ def map_geodataframe_column(  # noqa: PLR0913, PLR0917
 
         If set to ``None`` (default), no background layer will be
         plotted.
-    extent : [list, np.ndarray], optional
+    extent : list or array-like, optional
         Extent to zoom to for displaying the map. Should be of the
         format: ``[xmin, ymin, xmax, ymax]`` in the CRS units of
         `data_df`. By default, this is ``None``, which will result in
         the extent of the map being set based on `background_df`
         (if provided) or `data_df`.
-    boundaries_kwargs : [dict, None], optional
+    boundaries_kwargs : dict, optional
         Keyword arguments that can be used to configure display of the
         boundaries layer. If not specified (=None), it will default to
         use ``{"linewidth": 0.75, "zorder": 1, "edgecolor": "white"}``,
@@ -207,7 +207,7 @@ def map_geodataframe_column(  # noqa: PLR0913, PLR0917
         ``zorder`` to ``2``. For other options, refer to
         https://residentmario.github.io/geoplot/user_guide/Customizing_Plots.html
         and https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Polygon.html#matplotlib.patches.Polygon.
-    layer_kwargs : [dict, None], optional
+    layer_kwargs : dict, optional
         Optional styling to be applied to the data layer. By default
         ``None``, which results in the layer being plotted using the
         input breaks and colormap and no other changes. As an example,
@@ -217,7 +217,7 @@ def map_geodataframe_column(  # noqa: PLR0913, PLR0917
         to
         https://residentmario.github.io/geoplot/user_guide/Customizing_Plots.html#Cosmetic-parameters
         for other options.
-    legend_kwargs: [dict, None], optional
+    legend_kwargs: dict, optional
         Keyword arguments that can be used to configure display of the
         legend. If not specified (=None), it will default to use
         (``legend_kwargs={"marker": "s", "frameon": False,
@@ -225,11 +225,12 @@ def map_geodataframe_column(  # noqa: PLR0913, PLR0917
         For more information on the options available, refer to
         https://residentmario.github.io/geoplot/user_guide/
         Customizing_Plots.html#Legend.
-    projection: gplt.crs.Base, optional
+    projection: geoplot.projections, optional
         Projection to use for creating the map. Default is
-        gplt.crs.AlbersEqualArea(). For names of other options, refer to
+        :meth:`geoplot.crs.AlbersEqualArea`.
+        For names of other options, refer to
         https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html.
-    ax : [cartopy.mpl.geoaxes.GeoAxes, None]
+    ax : cartopy.mpl.geoaxes.GeoAxes, optional
         If specified, the map will be added to the specified existing
         GeoAxes. If not specified (default), a new GeoAxes will be
         created and returned.

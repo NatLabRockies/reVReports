@@ -12,13 +12,13 @@ dynamic = ["version"]
 description = "For creating standardized graphics to summarize/report outputs from reV supply curves."
 readme = "README.rst"
 authors = [
-  {name = "Michael Gleason", email = "mike.gleason@nrel.gov"},
+  {name = "Michael Gleason", email = "mike.gleason@nlr.gov"},
 ]
 maintainers = [
-  {name = "Pavlo Pinchuk", email = "ppinchuk@nrel.gov"},
+  {name = "Pavlo Pinchuk", email = "ppinchuk@nlr.gov"},
 ]
 license = "BSD-3-Clause"
-keywords = ["reVReports", "NREL", "Supply Curve", "Visualization", "Graphics"]
+keywords = ["reVReports", "NatLabRockies", "Supply Curve", "Visualization", "Graphics"]
 requires-python = ">= 3.10"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -39,7 +39,7 @@ dependencies = [
     "geoplot>=0.5.1,<1",
     "imagehash>=4.3.2,<5",
     "matplotlib>=3.10.8,<4",
-    "nrel-gaps>=0.8.11,<0.9",
+    "nlr-gaps>=0.9.0,<0.10",
     "numpy>=2.3.5,<3",
     "pandas>=2.3.3,<3",
     "pydantic>=2.12.4,<3",
@@ -54,7 +54,7 @@ dependencies = [
 dev = [
   "jupyter>=1.1.1,<2",
   "pipreqs>=0.4.13,<0.5",
-  "ruff>=0.14.5,<0.15",
+  "ruff>=0.14.14,<0.15",
   "ruff-lsp>=0.0.62,<0.0.63",
 ]
 test = [
@@ -71,6 +71,7 @@ test = [
 doc = [
   "ghp-import>=2.1.0,<3",
   "pydata-sphinx-theme>=0.16.1,<0.17",
+  "setuptools>=80.1.0,<81",
   "sphinx-click>=6.1.0,<7",
   "sphinx-copybutton>=0.5.2,<0.6",
   "sphinx-tabs>=3.4.1,<4",
@@ -79,16 +80,15 @@ doc = [
 build = [
   "build>=1.3.0,<2",
   "pkginfo>=1.12.1.2,<2",
-  "twine>=6.2.0,<7",
 ]
 
 [project.scripts]
 reVReports = "reVReports.cli:main"
 
 [project.urls]
-homepage = "https://github.com/NREL/reVReports"
-documentation = "https://nrel.github.io/reVReports/"
-repository = "https://github.com/NREL/reVReports"
+homepage = "https://github.com/NatLabRockies/reVReports"
+documentation = "https://natlabrockies.github.io/reVReports/"
+repository = "https://github.com/NatLabRockies/reVReports"
 
 
 [tool.setuptools.packages]
@@ -114,15 +114,20 @@ build = { features = ["default", "build"], solve-group = "dev" }
 [tool.pixi.tasks]
 geo-demo = { cmd = "reVReports maps -c config_geo.json -o ../../", cwd = "tests/data"}
 
+[tool.pixi.feature.dev.tasks]
+lint = "ruff check ./reVReports"
+format = "ruff format ./reVReports"
+
 [tool.pixi.feature.test.tasks]
 tests = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=85 tests/"
 tests-u = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=40 tests/unit"
 tests-i = "pytest --durations=20 -rapP -vv --cov=reVReports --cov-report=html --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=70 tests/integration"
 
+[tool.pixi.feature.doc.tasks]
+python-docs = { cmd = "make clean html", cwd = "docs", env = { SPHINXOPTS = "--fail-on-warning --keep-going --nitpicky" }}
+
 [tool.pixi.feature.build.tasks]
-build-wheels = { cmd = "uv build --sdist --wheel --out-dir dist/ ." }
-check-wheels = { cmd = ["twine", "check", "dist/*"], depends-on = ["build-wheels"] }
-upload-wheels = { cmd = ["twine", "upload", "dist/*"], depends-on = ["check-wheels"] }
+build-wheels = "uv build --sdist --wheel --out-dir dist/ ."
 
 [tool.pixi.dependencies]
 cartopy = ">=0.25.0,<0.26"
@@ -147,7 +152,7 @@ reVReports = { path = ".", editable = true }
 ipykernel = ">=7.1.0,<8"
 jupyter = ">=1.1.1,<2"
 pipreqs = ">=0.4.13,<0.5"
-ruff = ">=0.14.5,<0.15"
+ruff = ">=0.14.14,<0.15"
 ruff-lsp = ">=0.0.62,<0.0.63"
 
 [tool.pixi.feature.test.dependencies]
@@ -165,6 +170,7 @@ tox = ">=4.32.0,<5"
 ghp-import = ">=2.1.0,<3"
 make = ">=4.4.1,<5"
 pydata-sphinx-theme = ">=0.16.1,<0.17"
+setuptools = ">=80.1.0,<81"
 sphinx-click = ">=6.1.0,<7"
 sphinx-copybutton = ">=0.5.2,<0.6"
 sphinx-tabs = ">=3.4.1,<4"
@@ -173,7 +179,6 @@ sphinxcontrib-mermaid = ">=1.0.0,<2"
 [tool.pixi.feature.build.dependencies]
 python-build = ">=1.3.0,<2"
 pkginfo = ">=1.12.1.2,<2"
-twine = ">=6.2.0,<7"
 uv = ">=0.9.10,<0.10"
 
 
@@ -240,6 +245,7 @@ ignore = [
   "PYI024", # collections-named-tuple
   "RUF012", # mutable-class-default
   "RUF031", # incorrectly-parenthesized-tuple-in-subscript
+  "RUF067", # non-empty-init-module
   "S101", # assert
   "S324", # hashlib-insecure-hash-function
   "S403", # suspicious-pickle-import
@@ -332,3 +338,4 @@ testpaths = [
   "tests/unit",
   "tests/integration",
 ]
+markers = "skip_ci: marks test as one that should not be run on Github Workflows"

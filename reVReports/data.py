@@ -18,7 +18,7 @@ ORDERED_REGIONS = [
 ]
 
 
-NREL_REGIONS = {
+NLR_REGIONS = {
     "Oregon": "Pacific",
     "Washington": "Pacific",
     "Colorado": "Mountain",
@@ -152,9 +152,9 @@ def augment_sc_df(
     df["cumul_capacit_gw"] = df["capacity_mw"].cumsum() / 1000
     df["cumul_aep_twh"] = df["annual_energy_site_mwh"].cumsum() / 1000 / 1000
     df["cumul_area_sq_km"] = df["area_developable_sq_km"].cumsum()
-    df["nrel_region"] = df["state"].map(NREL_REGIONS)
-    df["nrel_region_cumul_capacit_gw"] = (
-        df.groupby("nrel_region")["capacity_mw"].cumsum() / 1000
+    df["nlr_region"] = df["state"].map(NLR_REGIONS)
+    df["nlr_region_cumul_capacit_gw"] = (
+        df.groupby("nlr_region")["capacity_mw"].cumsum() / 1000
     )
 
     return df

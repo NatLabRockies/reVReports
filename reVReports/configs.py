@@ -19,14 +19,18 @@ class BaseModelStrict(BaseModel):
     """Raise a ValidationError for extra parameters"""
 
     model_config = {"extra": "forbid"}
+    """Pydantic model config to error on extra parameters"""
 
 
 class SupplyCurveScenario(BaseModelStrict):
     """Inputs for an individual supply curve scenario"""
 
     source: Path
+    """Path to source file for this scenario"""
     name: str
+    """Name of this scenario (used for labeling in plots)"""
     color: str = None
+    """Color to use for this scenario in plots"""
 
     @field_validator("source")
     def expand_user(cls, value):  # noqa: N805
@@ -50,30 +54,45 @@ class Plots(BaseModelStrict):
     """Container for settings related to specific plots"""
 
     site_lcoe_max: float = 70
+    """Maximum value for site LCOE plot axes (in USD/MWh)"""
     total_lcoe_max: float = 100
+    """Maximum value for total LCOE plot axes (in USD/MWh)"""
 
 
 class MapVar(BaseModelStrict):
     """Container for settings related to mapping variables"""
 
     column: str
+    """Column name being mapped"""
     breaks: list[float]
+    """List of break points for mapping variable"""
     cmap: str
+    """Colormap to use for mapping variable"""
     legend_title: str
+    """Title to use for legend of mapping variable"""
 
 
 class Config(BaseModelStrict):
     """Configuration settings for creating plots"""
 
     tech: str
+    """Technology type (e.g. 'wind', 'osw', 'pv', 'geo')"""
     scenarios: list[SupplyCurveScenario] = []
+    """List of supply curve scenarios to include in plots"""
     plots: Plots = Plots()
+    """Plot settings (see :class:`Plots`)"""
     map_vars: list[MapVar] = []
+    """List of mapping variable settings (see :class:`MapVar`)"""
     exclude_maps: list[str] = []
+    """List of mapping variables to exclude from mapping"""
     lcoe_site_col: str = "lcoe_site_usd_per_mwh"
+    """Column name for site LCOE values (in USD/MWh)"""
     lcoe_all_in_col: str = "lcoe_all_in_usd_per_mwh"
+    """Column name for total LCOE values (in USD/MWh)"""
     cf_col: str = None
+    """Column name for capacity factor values (if applicable)"""
     prefix_outputs: bool = False
+    """Optional prefix to add to output filenames (e.g. ``'map_'``)"""
 
     @field_validator("scenarios")
     def default_scenario_colors(cls, value):  # noqa: N805
