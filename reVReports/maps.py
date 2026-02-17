@@ -82,15 +82,18 @@ class MapData:
 class BaseMapGenerator(ABC):
     """Generate geospatial visualizations from prepared datasets"""
 
-    def __init__(self, map_data):
+    def __init__(self, map_data, map_layout="horizontal"):
         """
 
         Parameters
         ----------
         map_data : MapData
             Prepared map data container.
+        map_layout : str, default="horizontal"
+            Map layout for scenario grids.
         """
         self._map_data = map_data
+        self._map_layout = map_layout.casefold()
 
     @property
     def num_scenarios(self):
@@ -98,8 +101,16 @@ class BaseMapGenerator(ABC):
         return len(self._map_data.scenario_dfs)
 
     @property
+    def map_layout(self):
+        """str: Map layout for scenario grids"""
+        return self._map_layout
+
+    @property
     def n_cols(self):
         """int: Number of columns in map output"""
+        if self.map_layout == "vertical":
+            return 2
+
         return max(2, int(np.ceil(np.sqrt(self.num_scenarios))))
 
     @property
@@ -339,11 +350,18 @@ class AutomaticallyStyledMapGenerator(BaseMapGenerator):
         axes_flat = ax.ravel()
         used_axes = list(axes_flat[: self.num_scenarios])
         extra_axes = list(axes_flat[self.num_scenarios :])
-
-        legend_cols = min(3, max(1, self.n_cols))
-        legend_font_size = SMALL_SIZE
-
         has_extra_panel = bool(extra_axes)
+
+        if self.map_layout == "vertical":
+            if has_extra_panel:
+                legend_cols = 1
+                legend_font_size = BIGGER_SIZE
+            else:
+                legend_cols = 3
+                legend_font_size = SMALL_SIZE
+        else:
+            legend_cols = min(3, max(1, self.n_cols))
+            legend_font_size = SMALL_SIZE
 
         layout = self._layout_config(has_extra_panel)
         self._position_axes(used_axes, layout)
@@ -478,9 +496,15 @@ def generate_maps_from_config(config, out_path, dpi):
     map_data = MapData(config, cap_col=cap_col)
 
     if len(map_data.scenario_dfs) <= MANUALLY_STYLED_SCENARIO_LIMIT:
-        plotter = ManualStyledMapGenerator(map_data)
+        plotter = ManualStyledMapGenerator(
+            map_data,
+            map_layout=config.map_layout,
+        )
     else:
-        plotter = AutomaticallyStyledMapGenerator(map_data)
+        plotter = AutomaticallyStyledMapGenerator(
+            map_data,
+            map_layout=config.map_layout,
+        )
 
     plotter.build_maps(
         map_vars,
