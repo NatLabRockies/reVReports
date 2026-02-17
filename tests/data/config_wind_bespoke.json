@@ -2,6 +2,7 @@
   "cf_col": "capacity_factor_ac",
   "lcoe_all_in_col": "lcoe_all_in_usd_per_mwh",
   "lcoe_site_col": "lcoe_site_usd_per_mwh",
+  "map_layout": "vertical",
   "map_vars": [],
   "plots": {
     "site_lcoe_max": 90,
