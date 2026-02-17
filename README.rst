@@ -2,7 +2,7 @@
 reVReports
 **********
 
-|License| |Zenodo| |PythonV| |PyPi| |Ruff| |Pixi| |SWR|
+|License| |Zenodo| |PythonV| |PyPi| |Ruff| |Pixi| |SWR| |Codecov|
 
 .. |PythonV| image:: https://badge.fury.io/py/reVReports.svg
     :target: https://pypi.org/project/reVReports/
@@ -24,6 +24,9 @@ reVReports
 
 .. |Zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.17633670.svg
     :target: https://doi.org/10.5281/zenodo.17633670
+
+.. |Codecov| image:: https://codecov.io/github/NatLabRockies/reVReports/graph/badge.svg?token=0JJ668UO3A
+    :target: https://codecov.io/github/NatLabRockies/reVReports
 
 .. inclusion-intro
 

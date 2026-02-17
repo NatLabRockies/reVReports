@@ -13,6 +13,7 @@ from reVReports.exceptions import reVReportsValueError
 
 DEFAULT_COLORS = [to_hex(rgb) for rgb in plt.colormaps["tab10"].colors]
 VALID_TECHS = ["wind", "osw", "pv", "geo"]
+VALID_MAP_LAYOUTS = ["horizontal", "vertical"]
 
 
 class BaseModelStrict(BaseModel):
@@ -85,6 +86,8 @@ class Config(BaseModelStrict):
     """List of mapping variable settings (see :class:`MapVar`)"""
     exclude_maps: list[str] = []
     """List of mapping variables to exclude from mapping"""
+    map_layout: str = "horizontal"
+    """Map layout for scenario grids (``horizontal`` or ``vertical``)"""
     lcoe_site_col: str = "lcoe_site_usd_per_mwh"
     """Column name for site LCOE values (in USD/MWh)"""
     lcoe_all_in_col: str = "lcoe_all_in_usd_per_mwh"
@@ -149,6 +152,37 @@ class Config(BaseModelStrict):
             raise reVReportsValueError(msg)
 
         return value
+
+    @field_validator("map_layout")
+    def valid_map_layout(cls, value):  # noqa: N805
+        """Check that the input value for map_layout is valid
+
+        Parameters
+        ----------
+        value : str
+            Input value for 'map_layout'
+
+        Returns
+        -------
+        str
+            Returns the input value (as long as it is one of the valid
+            options)
+
+        Raises
+        ------
+        reVReportsValueError
+            A reVReportsValueError will be raised if the input value is
+            not a valid option.
+        """
+        value_cf = value.casefold()
+        if value_cf not in VALID_MAP_LAYOUTS:
+            msg = (
+                f"Input map_layout '{value}' is invalid. Valid options "
+                f"are: {VALID_MAP_LAYOUTS}"
+            )
+            raise reVReportsValueError(msg)
+
+        return value_cf
 
     @classmethod
     def from_json(cls, json_path):

@@ -22,6 +22,7 @@ def test_config_happy(test_data_dir):
     assert config.lcoe_all_in_col == "lcoe_all_in_usd_per_mwh"
     assert config.cf_col == "capacity_factor_ac"
     assert config.map_vars == []
+    assert config.map_layout == "vertical"
 
 
 def test_config_defaults(test_data_dir):
@@ -34,6 +35,7 @@ def test_config_defaults(test_data_dir):
     assert config.lcoe_all_in_col == "lcoe_all_in_usd_per_mwh"
     assert config.cf_col is None
     assert config.map_vars == []
+    assert config.map_layout == "horizontal"
     for i, scenario in enumerate(config.scenarios):
         assert scenario.color == DEFAULT_COLORS[i]
 
@@ -52,6 +54,13 @@ def test_config_map_vars(test_data_dir):
     json_path = test_data_dir / "config_pv_map_vars.json"
     config = Config.from_json(json_path)
     assert len(config.map_vars) == 2
+
+
+def test_config_map_layout_casefold(test_data_dir):
+    """Test Config class casefolds map_layout values"""
+    json_path = test_data_dir / "config_wind_bespoke_4_scen_vertical.json"
+    config = Config.from_json(json_path)
+    assert config.map_layout == "vertical"
 
 
 if __name__ == "__main__":

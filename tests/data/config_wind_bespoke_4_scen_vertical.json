@@ -1,9 +1,10 @@
 {
-  "cf_col": "capacity_factor_ac",
+  "exclude_maps": [
+    "losses_wakes_pct"
+  ],
   "lcoe_all_in_col": "lcoe_all_in_usd_per_mwh",
   "lcoe_site_col": "lcoe_site_usd_per_mwh",
-  "map_layout": "vertical",
-  "map_vars": [],
+  "map_layout": "VERTICAL",
   "plots": {
     "site_lcoe_max": 90,
     "total_lcoe_max": 120
@@ -22,6 +23,11 @@
     {
       "color": "#b3cde3",
       "name": "Limited Access",
+      "source": "supply_curves/wind_bespoke/limited_access_sample.csv"
+    },
+    {
+      "color": "#edf8fb",
+      "name": "Extra Limited Access",
       "source": "supply_curves/wind_bespoke/limited_access_sample.csv"
     }
   ],
