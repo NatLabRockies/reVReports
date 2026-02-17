@@ -56,5 +56,12 @@ def test_config_map_vars(test_data_dir):
     assert len(config.map_vars) == 2
 
 
+def test_config_map_layout_casefold(test_data_dir):
+    """Test Config class casefolds map_layout values"""
+    json_path = test_data_dir / "config_wind_bespoke_4_scen_vertical.json"
+    config = Config.from_json(json_path)
+    assert config.map_layout == "vertical"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-s"])
