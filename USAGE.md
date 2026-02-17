@@ -105,6 +105,7 @@ Example Configuration File
       "legend_title": "Spur Line Costs ($/MW)"
     }
   ],
+  "map_layout": "horizontal",
   "tech": "wind"
 }
 ```
@@ -124,6 +125,7 @@ Description of Configuration Options:
     - `breaks`: Legend breaks for the map.
     - `cmap`: Colormap to apply. See `matplotlib` colormaps for valid options: https://matplotlib.org/stable/users/explain/colors/colormaps.html
     - `legend_title`: Title to be used for the map legend.
+- `map_layout`: Optional input that controls how scenario maps are arranged in the output grid. Use `horizontal` (default) for the existing balanced layout, or `vertical` to keep two maps per row and add rows as needed for more scenarios.
 - `exclude_maps`: List of columns to exclude from mapping. Useful for speeding up mapping process or in cases of backwards or cross-compatibility as new columns are added to supply curves. For example, for non-bespoke wind supply curves, specify `"exclude_maps": ["losses_wakes_pct"]` to skip mapping the wake loss column, which may not be present and would result in the `maps` command failing with an error.
 - `tech`: Specifies the technology of the input supply curves. Must be either `wind` or `pv`.
 
