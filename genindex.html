@@ -1,0 +1,1648 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; reVReports 1.3.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=28d163b9"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3030b3cb"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.3.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">reVReports 1.3.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ 
+</div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    --cell_size
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-c">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --char_map
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-m">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --config-file
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-c">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-c">reVReports-plots command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --dpi
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-d">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-d">reVReports-plots command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --out-path
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-o">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-o">reVReports-plots command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --out_csv
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-o">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --supply_curve_csv
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-i">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --verbose
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-v">reVReports command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    --version
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-version">reVReports command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -c
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-c">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-c">reVReports-plots command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-c">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -d
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-d">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-d">reVReports-plots command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -i
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-i">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -m
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-m">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -o
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-o">reVReports-maps command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-o">reVReports-plots command line option</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-o">reVReports-unpack-characterizations command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -v
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-v">reVReports command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.__add__">__add__() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.__mul__">__mul__() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.ALIGNED">ALIGNED (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.all">all() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotData.html#reVReports.plots.PlotData.all_df">all_df (PlotData property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.all_df">(PlotGenerator property)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.any">any() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.argmax">argmax() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.argmin">argmin() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.argpartition">argpartition() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.argsort">argsort() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.data.augment_sc_df.html#reVReports.data.augment_sc_df">augment_sc_df() (in module reVReports.data)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator">AutomaticallyStyledMapGenerator (class in reVReports.maps)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.plots.autoscale_x.html#reVReports.utilities.plots.autoscale_x">autoscale_x() (in module reVReports.utilities.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.plots.autoscale_y.html#reVReports.utilities.plots.autoscale_y">autoscale_y() (in module reVReports.utilities.plots)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.base">base (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator">BaseMapGenerator (class in reVReports.maps)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.BaseModelStrict.html#reVReports.configs.BaseModelStrict">BaseModelStrict (class in reVReports.configs)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.BEHAVED">BEHAVED (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="glossary.html#term-bespoke-wind-supply-curve"><strong>bespoke wind supply curve</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.MapVar.html#reVReports.configs.MapVar.breaks">breaks (MapVar attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_box_plots">build_box_plots() (PlotGenerator method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_capacity_by_region_bar_chart">build_capacity_by_region_bar_chart() (PlotGenerator method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_histograms">build_histograms() (PlotGenerator method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator.build_maps">build_maps() (AutomaticallyStyledMapGenerator method)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.build_maps">(BaseMapGenerator method)</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator.build_maps">(ManualStyledMapGenerator method)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_regional_box_plots">build_regional_box_plots() (PlotGenerator method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_supply_curves">build_supply_curves() (PlotGenerator method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.build_transmission_box_plots">build_transmission_box_plots() (PlotGenerator method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.byteswap">byteswap() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.C_CONTIGUOUS">C_CONTIGUOUS (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.CARRAY">CARRAY (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.cf_col">cf_col (Config attribute)</a>
+</li>
+      <li><a href="glossary.html#term-characterization-map"><strong>characterization map</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.data.check_files_match.html#reVReports.data.check_files_match">check_files_match() (in module reVReports.data)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.choose">choose() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.clip">clip() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.MapVar.html#reVReports.configs.MapVar.cmap">cmap (MapVar attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario.color">color (SupplyCurveScenario attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.MapVar.html#reVReports.configs.MapVar.column">column (MapVar attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.plots.compare_images_approx.html#reVReports.utilities.plots.compare_images_approx">compare_images_approx() (in module reVReports.utilities.plots)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.compress">compress() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config">Config (class in reVReports.configs)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.MapData.html#reVReports.maps.MapData.config">config (MapData property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.plots.PlotData.html#reVReports.plots.PlotData.config">(PlotData property)</a>
+</li>
+      </ul></li>
+      <li><a href="glossary.html#term-configuration-file"><strong>configuration file</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.configure_map_params.html#reVReports.maps.configure_map_params">configure_map_params() (in module reVReports.maps)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.plots.configure_matplotlib.html#reVReports.utilities.plots.configure_matplotlib">configure_matplotlib() (in module reVReports.utilities.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.conj">conj() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.conjugate">conjugate() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.copy">copy() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.cumprod">cumprod() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.cumsum">cumsum() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.data">data (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.default_scenario_colors">default_scenario_colors() (Config class method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.diagonal">diagonal() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.dot">dot() (YBFixedBounds method)</a>
+</li>
+      <li><a href="glossary.html#term-DPI"><strong>DPI</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.dump">dump() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.dumps">dumps() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.exclude_maps">exclude_maps (Config attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario.expand_user">expand_user() (SupplyCurveScenario class method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.F_CONTIGUOUS">F_CONTIGUOUS (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.FARRAY">FARRAY (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.fill">fill() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.flags">flags (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.FNC">FNC (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.FORC">FORC (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.plots.format_graph.html#reVReports.utilities.plots.format_graph">format_graph() (in module reVReports.utilities.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.from_json">from_json() (Config class method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.maps.generate_maps_from_config.html#reVReports.maps.generate_maps_from_config">generate_maps_from_config() (in module reVReports.maps)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.logs.get_logger.html#reVReports.logs.get_logger">get_logger() (in module reVReports.logs)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.getfield">getfield() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.imag">imag (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.plots.is_numeric.html#reVReports.utilities.plots.is_numeric">is_numeric() (in module reVReports.utilities.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.itemsize">itemsize (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.lcoe_all_in_col">lcoe_all_in_col (Config attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.lcoe_site_col">lcoe_site_col (Config attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.MapVar.html#reVReports.configs.MapVar.legend_title">legend_title (MapVar attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.plots.make_bar_plot.html#reVReports.plots.make_bar_plot">make_bar_plot() (in module reVReports.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator">ManualStyledMapGenerator (class in reVReports.maps)</a>
+</li>
+      <li><a href="glossary.html#term-map-bundle"><strong>map bundle</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.map_geodataframe_column.html#reVReports.utilities.maps.map_geodataframe_column">map_geodataframe_column() (in module reVReports.utilities.maps)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator.map_layout">map_layout (AutomaticallyStyledMapGenerator property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.map_layout">(BaseMapGenerator property)</a>
+</li>
+        <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.map_layout">(Config attribute)</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator.map_layout">(ManualStyledMapGenerator property)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.map_vars">map_vars (Config attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.MapData.html#reVReports.maps.MapData">MapData (class in reVReports.maps)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.MapVar.html#reVReports.configs.MapVar">MapVar (class in reVReports.configs)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.max">max() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.mean">mean() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.min">min() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="_autosummary/reVReports.html#module-reVReports">reVReports</a>
+</li>
+        <li><a href="_autosummary/reVReports.characterizations.html#module-reVReports.characterizations">reVReports.characterizations</a>
+</li>
+        <li><a href="_autosummary/reVReports.cli.html#module-reVReports.cli">reVReports.cli</a>
+</li>
+        <li><a href="_autosummary/reVReports.configs.html#module-reVReports.configs">reVReports.configs</a>
+</li>
+        <li><a href="_autosummary/reVReports.data.html#module-reVReports.data">reVReports.data</a>
+</li>
+        <li><a href="_autosummary/reVReports.exceptions.html#module-reVReports.exceptions">reVReports.exceptions</a>
+</li>
+        <li><a href="_autosummary/reVReports.fonts.html#module-reVReports.fonts">reVReports.fonts</a>
+</li>
+        <li><a href="_autosummary/reVReports.logs.html#module-reVReports.logs">reVReports.logs</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.html#module-reVReports.maps">reVReports.maps</a>
+</li>
+        <li><a href="_autosummary/reVReports.plots.html#module-reVReports.plots">reVReports.plots</a>
+</li>
+        <li><a href="_autosummary/reVReports.utilities.html#module-reVReports.utilities">reVReports.utilities</a>
+</li>
+        <li><a href="_autosummary/reVReports.utilities.maps.html#module-reVReports.utilities.maps">reVReports.utilities.maps</a>
+</li>
+        <li><a href="_autosummary/reVReports.utilities.plots.html#module-reVReports.utilities.plots">reVReports.utilities.plots</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.mT">mT (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator.n_cols">n_cols (AutomaticallyStyledMapGenerator property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.n_cols">(BaseMapGenerator property)</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator.n_cols">(ManualStyledMapGenerator property)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator.n_rows">n_rows (AutomaticallyStyledMapGenerator property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.n_rows">(BaseMapGenerator property)</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator.n_rows">(ManualStyledMapGenerator property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario.name">name (SupplyCurveScenario attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.nbytes">nbytes (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.ndim">ndim (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.nonzero">nonzero() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator.num_scenarios">num_scenarios (AutomaticallyStyledMapGenerator property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.num_scenarios">(BaseMapGenerator property)</a>
+</li>
+        <li><a href="_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator.num_scenarios">(ManualStyledMapGenerator property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="glossary.html#term-output-directory"><strong>output directory</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.OWNDATA">OWNDATA (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="glossary.html#term-Pixi"><strong>Pixi</strong></a>
+</li>
+      <li><a href="glossary.html#term-plot-bundle"><strong>plot bundle</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotData.html#reVReports.plots.PlotData">PlotData (class in reVReports.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator">PlotGenerator (class in reVReports.plots)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Plots.html#reVReports.configs.Plots">Plots (class in reVReports.configs)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.plots">plots (Config attribute)</a>
+</li>
+      <li><a href="glossary.html#term-prefix-outputs"><strong>prefix outputs</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.prefix_outputs">prefix_outputs (Config attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.prod">prod() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.put">put() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.real">real (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.characterizations.recast_categories.html#reVReports.characterizations.recast_categories">recast_categories() (in module reVReports.characterizations)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.repeat">repeat() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.reshape">reshape() (YBFixedBounds method)</a>
+</li>
+      <li><a href="glossary.html#term-reVReports"><strong>reVReports</strong></a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.html#module-reVReports">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports command line option
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-v">--verbose</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-version">--version</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-v">-v</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports-maps command line option
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-c">--config-file</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-d">--dpi</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-o">--out-path</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-c">-c</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-d">-d</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-maps-o">-o</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports-plots command line option
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-c">--config-file</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-d">--dpi</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-o">--out-path</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-c">-c</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-d">-d</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-plots-o">-o</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports-unpack-characterizations command line option
+
+      <ul>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-c">--cell_size</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-m">--char_map</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-o">--out_csv</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-i">--supply_curve_csv</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-c">-c</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-i">-i</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-m">-m</a>
+</li>
+        <li><a href="_cli/cli.html#cmdoption-reVReports-unpack-characterizations-o">-o</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    reVReports.characterizations
+
+      <ul>
+        <li><a href="_autosummary/reVReports.characterizations.html#module-reVReports.characterizations">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.cli
+
+      <ul>
+        <li><a href="_autosummary/reVReports.cli.html#module-reVReports.cli">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.configs
+
+      <ul>
+        <li><a href="_autosummary/reVReports.configs.html#module-reVReports.configs">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.data
+
+      <ul>
+        <li><a href="_autosummary/reVReports.data.html#module-reVReports.data">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.exceptions
+
+      <ul>
+        <li><a href="_autosummary/reVReports.exceptions.html#module-reVReports.exceptions">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.fonts
+
+      <ul>
+        <li><a href="_autosummary/reVReports.fonts.html#module-reVReports.fonts">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.logs
+
+      <ul>
+        <li><a href="_autosummary/reVReports.logs.html#module-reVReports.logs">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.maps
+
+      <ul>
+        <li><a href="_autosummary/reVReports.maps.html#module-reVReports.maps">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.plots
+
+      <ul>
+        <li><a href="_autosummary/reVReports.plots.html#module-reVReports.plots">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.utilities
+
+      <ul>
+        <li><a href="_autosummary/reVReports.utilities.html#module-reVReports.utilities">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.utilities.maps
+
+      <ul>
+        <li><a href="_autosummary/reVReports.utilities.maps.html#module-reVReports.utilities.maps">module</a>
+</li>
+      </ul></li>
+      <li>
+    reVReports.utilities.plots
+
+      <ul>
+        <li><a href="_autosummary/reVReports.utilities.plots.html#module-reVReports.utilities.plots">module</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.exceptions.reVReportsError.html#reVReports.exceptions.reVReportsError">reVReportsError</a>
+</li>
+      <li><a href="_autosummary/reVReports.exceptions.reVReportsKeyError.html#reVReports.exceptions.reVReportsKeyError">reVReportsKeyError</a>
+</li>
+      <li><a href="_autosummary/reVReports.exceptions.reVReportsTypeError.html#reVReports.exceptions.reVReportsTypeError">reVReportsTypeError</a>
+</li>
+      <li><a href="_autosummary/reVReports.exceptions.reVReportsValueError.html#reVReports.exceptions.reVReportsValueError">reVReportsValueError</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.round">round() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="glossary.html#term-scenario"><strong>scenario</strong></a>
+</li>
+      <li><a href="glossary.html#term-scenario-palette"><strong>scenario palette</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.maps.MapData.html#reVReports.maps.MapData.scenario_dfs">scenario_dfs (MapData property)</a>
+
+      <ul>
+        <li><a href="_autosummary/reVReports.plots.PlotData.html#reVReports.plots.PlotData.scenario_dfs">(PlotData property)</a>
+</li>
+        <li><a href="_autosummary/reVReports.plots.PlotGenerator.html#reVReports.plots.PlotGenerator.scenario_dfs">(PlotGenerator property)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.scenario_palette">scenario_palette (Config property)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.scenarios">scenarios (Config attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.searchsorted">searchsorted() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.setflags">setflags() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Plots.html#reVReports.configs.Plots.site_lcoe_max">site_lcoe_max (Plots attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.size">size (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.sort">sort() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario.source">source (SupplyCurveScenario attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.squeeze">squeeze() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.std">std() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.strides">strides (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.sum">sum() (YBFixedBounds method)</a>
+</li>
+      <li><a href="glossary.html#term-supply-curve"><strong>supply curve</strong></a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario">SupplyCurveScenario (class in reVReports.configs)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.swapaxes">swapaxes() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.take">take() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.tech">tech (Config attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.to_device">to_device() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.tolist">tolist() (YBFixedBounds method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.plots.PlotData.html#reVReports.plots.PlotData.top_level_sums_df">top_level_sums_df (PlotData property)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Plots.html#reVReports.configs.Plots.total_lcoe_max">total_lcoe_max (Plots attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.trace">trace() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.characterizations.unpack_characterizations.html#reVReports.characterizations.unpack_characterizations">unpack_characterizations() (in module reVReports.characterizations)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.valid_map_layout">valid_map_layout() (Config class method)</a>
+</li>
+      <li><a href="_autosummary/reVReports.configs.Config.html#reVReports.configs.Config.valid_tech">valid_tech() (Config class method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.characterizations.validate_characterization_remapper.html#reVReports.characterizations.validate_characterization_remapper">validate_characterization_remapper() (in module reVReports.characterizations)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.var">var() (YBFixedBounds method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.plots.wrap_labels.html#reVReports.utilities.plots.wrap_labels">wrap_labels() (in module reVReports.utilities.plots)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.WRITEABLE">WRITEABLE (YBFixedBounds attribute)</a>
+</li>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.WRITEBACKIFCOPY">WRITEBACKIFCOPY (YBFixedBounds attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds">YBFixedBounds (class in reVReports.utilities.maps)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Alliance for Energy Innovation, LLC and Root Geospatial LLC.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

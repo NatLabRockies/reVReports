@@ -1,0 +1,6 @@
+reVReports.maps.configure\_map\_params
+======================================
+
+.. currentmodule:: reVReports.maps
+
+.. autofunction:: configure_map_params

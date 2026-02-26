@@ -1,0 +1,43 @@
+reVReports.configs.Config
+=========================
+
+.. currentmodule:: reVReports.configs
+
+.. autoclass:: Config
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Config.default_scenario_colors
+      ~Config.from_json
+      ~Config.valid_map_layout
+      ~Config.valid_tech
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Config.scenario_palette
+      ~Config.tech
+      ~Config.scenarios
+      ~Config.plots
+      ~Config.map_vars
+      ~Config.exclude_maps
+      ~Config.map_layout
+      ~Config.lcoe_site_col
+      ~Config.lcoe_all_in_col
+      ~Config.cf_col
+      ~Config.prefix_outputs
+   
+   

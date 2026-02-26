@@ -1,0 +1,30 @@
+reVReports.maps.MapData
+=======================
+
+.. currentmodule:: reVReports.maps
+
+.. autoclass:: MapData
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MapData.config
+      ~MapData.scenario_dfs
+   
+   

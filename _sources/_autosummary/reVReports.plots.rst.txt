@@ -1,0 +1,39 @@
+reVReports.plots
+================
+
+.. automodule:: reVReports.plots
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      make_bar_plot
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      PlotData
+      PlotGenerator
+   
+   
+
+   
+   
+   
+
+
+

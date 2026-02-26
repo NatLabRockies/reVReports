@@ -1,0 +1,6 @@
+reVReports.utilities.plots.wrap\_labels
+=======================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: wrap_labels

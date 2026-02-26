@@ -1,0 +1,6 @@
+reVReports.exceptions.reVReportsKeyError
+========================================
+
+.. currentmodule:: reVReports.exceptions
+
+.. autoexception:: reVReportsKeyError

@@ -1,0 +1,6 @@
+reVReports.utilities.maps.map\_geodataframe\_column
+===================================================
+
+.. currentmodule:: reVReports.utilities.maps
+
+.. autofunction:: map_geodataframe_column

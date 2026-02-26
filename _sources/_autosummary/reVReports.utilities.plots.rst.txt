@@ -1,0 +1,36 @@
+reVReports.utilities.plots
+==========================
+
+.. automodule:: reVReports.utilities.plots
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      autoscale_x
+      autoscale_y
+      compare_images_approx
+      configure_matplotlib
+      format_graph
+      is_numeric
+      wrap_labels
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

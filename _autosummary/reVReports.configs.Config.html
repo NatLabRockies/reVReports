@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>reVReports.configs.Config &#8212; reVReports 1.3.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=28d163b9"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="reVReports.configs.MapVar" href="reVReports.configs.MapVar.html" />
+    <link rel="prev" title="reVReports.configs.BaseModelStrict" href="reVReports.configs.BaseModelStrict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.3.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">reVReports 1.3.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.characterizations.html">reVReports.characterizations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.characterizations.recast_categories.html">reVReports.characterizations.recast_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.characterizations.unpack_characterizations.html">reVReports.characterizations.unpack_characterizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.characterizations.validate_characterization_remapper.html">reVReports.characterizations.validate_characterization_remapper</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="reVReports.cli.html">reVReports.cli</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="reVReports.configs.html">reVReports.configs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reVReports.configs.BaseModelStrict.html">reVReports.configs.BaseModelStrict</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">reVReports.configs.Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.configs.MapVar.html">reVReports.configs.MapVar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.configs.Plots.html">reVReports.configs.Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.configs.SupplyCurveScenario.html">reVReports.configs.SupplyCurveScenario</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.data.html">reVReports.data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.data.augment_sc_df.html">reVReports.data.augment_sc_df</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.data.check_files_match.html">reVReports.data.check_files_match</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.exceptions.html">reVReports.exceptions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.exceptions.reVReportsError.html">reVReports.exceptions.reVReportsError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.exceptions.reVReportsKeyError.html">reVReports.exceptions.reVReportsKeyError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.exceptions.reVReportsTypeError.html">reVReports.exceptions.reVReportsTypeError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.exceptions.reVReportsValueError.html">reVReports.exceptions.reVReportsValueError</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="reVReports.fonts.html">reVReports.fonts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.logs.html">reVReports.logs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.logs.get_logger.html">reVReports.logs.get_logger</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.maps.html">reVReports.maps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.configure_map_params.html">reVReports.maps.configure_map_params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.generate_maps_from_config.html">reVReports.maps.generate_maps_from_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.AutomaticallyStyledMapGenerator.html">reVReports.maps.AutomaticallyStyledMapGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.BaseMapGenerator.html">reVReports.maps.BaseMapGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.ManualStyledMapGenerator.html">reVReports.maps.ManualStyledMapGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.maps.MapData.html">reVReports.maps.MapData</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.plots.html">reVReports.plots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.plots.make_bar_plot.html">reVReports.plots.make_bar_plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.plots.PlotData.html">reVReports.plots.PlotData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reVReports.plots.PlotGenerator.html">reVReports.plots.PlotGenerator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reVReports.utilities.html">reVReports.utilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reVReports.utilities.maps.html">reVReports.utilities.maps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.maps.map_geodataframe_column.html">reVReports.utilities.maps.map_geodataframe_column</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.maps.YBFixedBounds.html">reVReports.utilities.maps.YBFixedBounds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="reVReports.utilities.plots.html">reVReports.utilities.plots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.autoscale_x.html">reVReports.utilities.plots.autoscale_x</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.autoscale_y.html">reVReports.utilities.plots.autoscale_y</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.compare_images_approx.html">reVReports.utilities.plots.compare_images_approx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.configure_matplotlib.html">reVReports.utilities.plots.configure_matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.format_graph.html">reVReports.utilities.plots.format_graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.is_numeric.html">reVReports.utilities.plots.is_numeric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reVReports.utilities.plots.wrap_labels.html">reVReports.utilities.plots.wrap_labels</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="reVReports.html" class="nav-link">reVReports</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="reVReports.configs.html" class="nav-link">reVReports.configs</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">reVReports.configs.Config</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="revreports-configs-config">
+<h1>reVReports.configs.Config<a class="headerlink" href="#revreports-configs-config" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="reVReports.configs.Config">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">tech</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenarios</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario" title="reVReports.configs.SupplyCurveScenario"><span class="pre">SupplyCurveScenario</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="reVReports.configs.Plots.html#reVReports.configs.Plots" title="reVReports.configs.Plots"><span class="pre">Plots</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Plots(site_lcoe_max=70,</span> <span class="pre">total_lcoe_max=100)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="reVReports.configs.MapVar.html#reVReports.configs.MapVar" title="reVReports.configs.MapVar"><span class="pre">MapVar</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_maps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'horizontal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lcoe_site_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lcoe_site_usd_per_mwh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lcoe_all_in_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lcoe_all_in_usd_per_mwh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cf_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reVReports/configs.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="reVReports.configs.BaseModelStrict.html#reVReports.configs.BaseModelStrict" title="reVReports.configs.BaseModelStrict"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModelStrict</span></code></a></p>
+<p>Configuration settings for creating plots</p>
+<p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises [<cite>ValidationError</cite>][pydantic_core.ValidationError] if the input data cannot be
+validated to form a valid model.</p>
+<p><cite>self</cite> is explicitly positional-only to allow <cite>self</cite> as a field name.</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.default_scenario_colors" title="reVReports.configs.Config.default_scenario_colors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_scenario_colors</span></code></a>(value)</p></td>
+<td><p>Set default colors for scenarios</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.from_json" title="reVReports.configs.Config.from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></a>(json_path)</p></td>
+<td><p>Load configuration from a JSON file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.valid_map_layout" title="reVReports.configs.Config.valid_map_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid_map_layout</span></code></a>(value)</p></td>
+<td><p>Check that the input value for map_layout is valid</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.valid_tech" title="reVReports.configs.Config.valid_tech"><code class="xref py py-obj docutils literal notranslate"><span class="pre">valid_tech</span></code></a>(value)</p></td>
+<td><p>Check that the input value for tech is valid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attributes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.scenario_palette" title="reVReports.configs.Config.scenario_palette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scenario_palette</span></code></a></p></td>
+<td><p>Get a dictionary mapping scenario names to colors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.tech" title="reVReports.configs.Config.tech"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tech</span></code></a></p></td>
+<td><p>Technology type (e.g. 'wind', 'osw', 'pv', 'geo').</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.scenarios" title="reVReports.configs.Config.scenarios"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scenarios</span></code></a></p></td>
+<td><p>List of supply curve scenarios to include in plots</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.plots" title="reVReports.configs.Config.plots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plots</span></code></a></p></td>
+<td><p>Plot settings (see <a class="reference internal" href="reVReports.configs.Plots.html#reVReports.configs.Plots" title="reVReports.configs.Plots"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plots</span></code></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.map_vars" title="reVReports.configs.Config.map_vars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_vars</span></code></a></p></td>
+<td><p>List of mapping variable settings (see <a class="reference internal" href="reVReports.configs.MapVar.html#reVReports.configs.MapVar" title="reVReports.configs.MapVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapVar</span></code></a>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.exclude_maps" title="reVReports.configs.Config.exclude_maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exclude_maps</span></code></a></p></td>
+<td><p>List of mapping variables to exclude from mapping</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.map_layout" title="reVReports.configs.Config.map_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_layout</span></code></a></p></td>
+<td><p>Map layout for scenario grids (<code class="docutils literal notranslate"><span class="pre">horizontal</span></code> or <code class="docutils literal notranslate"><span class="pre">vertical</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.lcoe_site_col" title="reVReports.configs.Config.lcoe_site_col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lcoe_site_col</span></code></a></p></td>
+<td><p>Column name for site LCOE values (in USD/MWh)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.lcoe_all_in_col" title="reVReports.configs.Config.lcoe_all_in_col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lcoe_all_in_col</span></code></a></p></td>
+<td><p>Column name for total LCOE values (in USD/MWh)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#reVReports.configs.Config.cf_col" title="reVReports.configs.Config.cf_col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cf_col</span></code></a></p></td>
+<td><p>Column name for capacity factor values (if applicable)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#reVReports.configs.Config.prefix_outputs" title="reVReports.configs.Config.prefix_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix_outputs</span></code></a></p></td>
+<td><p>Optional prefix to add to output filenames (e.g. <code class="docutils literal notranslate"><span class="pre">'map_'</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.tech">
+<span class="sig-name descname"><span class="pre">tech</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#reVReports.configs.Config.tech" title="Link to this definition">#</a></dt>
+<dd><p>Technology type (e.g. ‘wind’, ‘osw’, ‘pv’, ‘geo’)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.scenarios">
+<span class="sig-name descname"><span class="pre">scenarios</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="reVReports.configs.SupplyCurveScenario.html#reVReports.configs.SupplyCurveScenario" title="reVReports.configs.SupplyCurveScenario"><span class="pre">SupplyCurveScenario</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#reVReports.configs.Config.scenarios" title="Link to this definition">#</a></dt>
+<dd><p>List of supply curve scenarios to include in plots</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.plots">
+<span class="sig-name descname"><span class="pre">plots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="reVReports.configs.Plots.html#reVReports.configs.Plots" title="reVReports.configs.Plots"><span class="pre">Plots</span></a></em><a class="headerlink" href="#reVReports.configs.Config.plots" title="Link to this definition">#</a></dt>
+<dd><p>Plot settings (see <a class="reference internal" href="reVReports.configs.Plots.html#reVReports.configs.Plots" title="reVReports.configs.Plots"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plots</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.map_vars">
+<span class="sig-name descname"><span class="pre">map_vars</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="reVReports.configs.MapVar.html#reVReports.configs.MapVar" title="reVReports.configs.MapVar"><span class="pre">MapVar</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#reVReports.configs.Config.map_vars" title="Link to this definition">#</a></dt>
+<dd><p>List of mapping variable settings (see <a class="reference internal" href="reVReports.configs.MapVar.html#reVReports.configs.MapVar" title="reVReports.configs.MapVar"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapVar</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.exclude_maps">
+<span class="sig-name descname"><span class="pre">exclude_maps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#reVReports.configs.Config.exclude_maps" title="Link to this definition">#</a></dt>
+<dd><p>List of mapping variables to exclude from mapping</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.map_layout">
+<span class="sig-name descname"><span class="pre">map_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#reVReports.configs.Config.map_layout" title="Link to this definition">#</a></dt>
+<dd><p>Map layout for scenario grids (<code class="docutils literal notranslate"><span class="pre">horizontal</span></code> or <code class="docutils literal notranslate"><span class="pre">vertical</span></code>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.lcoe_site_col">
+<span class="sig-name descname"><span class="pre">lcoe_site_col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#reVReports.configs.Config.lcoe_site_col" title="Link to this definition">#</a></dt>
+<dd><p>Column name for site LCOE values (in USD/MWh)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.lcoe_all_in_col">
+<span class="sig-name descname"><span class="pre">lcoe_all_in_col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#reVReports.configs.Config.lcoe_all_in_col" title="Link to this definition">#</a></dt>
+<dd><p>Column name for total LCOE values (in USD/MWh)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.cf_col">
+<span class="sig-name descname"><span class="pre">cf_col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#reVReports.configs.Config.cf_col" title="Link to this definition">#</a></dt>
+<dd><p>Column name for capacity factor values (if applicable)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reVReports.configs.Config.prefix_outputs">
+<span class="sig-name descname"><span class="pre">prefix_outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><a class="headerlink" href="#reVReports.configs.Config.prefix_outputs" title="Link to this definition">#</a></dt>
+<dd><p>Optional prefix to add to output filenames (e.g. <code class="docutils literal notranslate"><span class="pre">'map_'</span></code>)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reVReports.configs.Config.default_scenario_colors">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_scenario_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reVReports/configs.html#Config.default_scenario_colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config.default_scenario_colors" title="Link to this definition">#</a></dt>
+<dd><p>Set default colors for scenarios</p>
+<p>If input scenarios do not have a color set, this function sets
+them to values from the tab10 colormap. This is handled at the
+Config level rather than the SupplyCurveScenario level so that
+the colormap can be incremented for each scenario.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of SupplyCurveScenario models.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> – List of SupplyCurveScenarios with default colors set,
+if needed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reVReports.configs.Config.valid_tech">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valid_tech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reVReports/configs.html#Config.valid_tech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config.valid_tech" title="Link to this definition">#</a></dt>
+<dd><p>Check that the input value for tech is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Input value for ‘tech’</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> – Returns the input value (as long as it is one of the valid
+options)</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="reVReports.exceptions.reVReportsValueError.html#reVReports.exceptions.reVReportsValueError" title="reVReports.exceptions.reVReportsValueError"><strong>reVReportsValueError</strong></a> – A reVReportsValueError will be raised if the input value is
+    not a valid option.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reVReports.configs.Config.valid_map_layout">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valid_map_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reVReports/configs.html#Config.valid_map_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config.valid_map_layout" title="Link to this definition">#</a></dt>
+<dd><p>Check that the input value for map_layout is valid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Input value for ‘map_layout’</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> – Returns the input value (as long as it is one of the valid
+options)</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="reVReports.exceptions.reVReportsValueError.html#reVReports.exceptions.reVReportsValueError" title="reVReports.exceptions.reVReportsValueError"><strong>reVReportsValueError</strong></a> – A reVReportsValueError will be raised if the input value is
+    not a valid option.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reVReports.configs.Config.from_json">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reVReports/configs.html#Config.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config.from_json" title="Link to this definition">#</a></dt>
+<dd><p>Load configuration from a JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_path</strong> (<a class="reference external" href="https://docs.python.org/3/glossary.html#term-path-like-object" title="(in Python v3.14)"><span class="xref std std-term">path-like</span></a>) – Path to JSON file containing input settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#reVReports.configs.Config" title="reVReports.configs.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a> – Configuration settings.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="reVReports.configs.Config.scenario_palette">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scenario_palette</span></span><a class="reference internal" href="../_modules/reVReports/configs.html#Config.scenario_palette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reVReports.configs.Config.scenario_palette" title="Link to this definition">#</a></dt>
+<dd><p>Get a dictionary mapping scenario names to colors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> – Dictionary mapping scenario names to colors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reVReports.configs.BaseModelStrict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">reVReports.configs.BaseModelStrict</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="reVReports.configs.MapVar.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">reVReports.configs.MapVar</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.tech"><code class="docutils literal notranslate"><span class="pre">Config.tech</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.scenarios"><code class="docutils literal notranslate"><span class="pre">Config.scenarios</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.plots"><code class="docutils literal notranslate"><span class="pre">Config.plots</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.map_vars"><code class="docutils literal notranslate"><span class="pre">Config.map_vars</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.exclude_maps"><code class="docutils literal notranslate"><span class="pre">Config.exclude_maps</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.map_layout"><code class="docutils literal notranslate"><span class="pre">Config.map_layout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.lcoe_site_col"><code class="docutils literal notranslate"><span class="pre">Config.lcoe_site_col</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.lcoe_all_in_col"><code class="docutils literal notranslate"><span class="pre">Config.lcoe_all_in_col</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.cf_col"><code class="docutils literal notranslate"><span class="pre">Config.cf_col</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.prefix_outputs"><code class="docutils literal notranslate"><span class="pre">Config.prefix_outputs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.default_scenario_colors"><code class="docutils literal notranslate"><span class="pre">Config.default_scenario_colors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.valid_tech"><code class="docutils literal notranslate"><span class="pre">Config.valid_tech()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.valid_map_layout"><code class="docutils literal notranslate"><span class="pre">Config.valid_map_layout()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.from_json"><code class="docutils literal notranslate"><span class="pre">Config.from_json()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reVReports.configs.Config.scenario_palette"><code class="docutils literal notranslate"><span class="pre">Config.scenario_palette</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Alliance for Energy Innovation, LLC and Root Geospatial LLC.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

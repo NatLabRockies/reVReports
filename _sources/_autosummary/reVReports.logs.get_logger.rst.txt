@@ -1,0 +1,6 @@
+reVReports.logs.get\_logger
+===========================
+
+.. currentmodule:: reVReports.logs
+
+.. autofunction:: get_logger

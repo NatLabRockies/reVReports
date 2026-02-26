@@ -1,0 +1,81 @@
+reVReports.utilities.maps.YBFixedBounds
+=======================================
+
+.. currentmodule:: reVReports.utilities.maps
+
+.. autoclass:: YBFixedBounds
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~YBFixedBounds.all
+      ~YBFixedBounds.any
+      ~YBFixedBounds.argmax
+      ~YBFixedBounds.argmin
+      ~YBFixedBounds.argpartition
+      ~YBFixedBounds.argsort
+      ~YBFixedBounds.byteswap
+      ~YBFixedBounds.choose
+      ~YBFixedBounds.clip
+      ~YBFixedBounds.compress
+      ~YBFixedBounds.conj
+      ~YBFixedBounds.conjugate
+      ~YBFixedBounds.copy
+      ~YBFixedBounds.cumprod
+      ~YBFixedBounds.cumsum
+      ~YBFixedBounds.diagonal
+      ~YBFixedBounds.dot
+      ~YBFixedBounds.dump
+      ~YBFixedBounds.dumps
+      ~YBFixedBounds.fill
+      ~YBFixedBounds.getfield
+      ~YBFixedBounds.max
+      ~YBFixedBounds.mean
+      ~YBFixedBounds.min
+      ~YBFixedBounds.nonzero
+      ~YBFixedBounds.prod
+      ~YBFixedBounds.put
+      ~YBFixedBounds.repeat
+      ~YBFixedBounds.reshape
+      ~YBFixedBounds.round
+      ~YBFixedBounds.searchsorted
+      ~YBFixedBounds.setflags
+      ~YBFixedBounds.sort
+      ~YBFixedBounds.squeeze
+      ~YBFixedBounds.std
+      ~YBFixedBounds.sum
+      ~YBFixedBounds.swapaxes
+      ~YBFixedBounds.take
+      ~YBFixedBounds.to_device
+      ~YBFixedBounds.tolist
+      ~YBFixedBounds.trace
+      ~YBFixedBounds.var
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~YBFixedBounds.base
+      ~YBFixedBounds.data
+      ~YBFixedBounds.flags
+      ~YBFixedBounds.imag
+      ~YBFixedBounds.itemsize
+      ~YBFixedBounds.mT
+      ~YBFixedBounds.nbytes
+      ~YBFixedBounds.ndim
+      ~YBFixedBounds.real
+      ~YBFixedBounds.size
+      ~YBFixedBounds.strides
+   
+   

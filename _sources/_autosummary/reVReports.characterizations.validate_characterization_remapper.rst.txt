@@ -1,0 +1,6 @@
+reVReports.characterizations.validate\_characterization\_remapper
+=================================================================
+
+.. currentmodule:: reVReports.characterizations
+
+.. autofunction:: validate_characterization_remapper

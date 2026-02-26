@@ -1,0 +1,33 @@
+reVReports.maps.BaseMapGenerator
+================================
+
+.. currentmodule:: reVReports.maps
+
+.. autoclass:: BaseMapGenerator
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BaseMapGenerator.build_maps
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BaseMapGenerator.map_layout
+      ~BaseMapGenerator.n_cols
+      ~BaseMapGenerator.n_rows
+      ~BaseMapGenerator.num_scenarios
+   
+   

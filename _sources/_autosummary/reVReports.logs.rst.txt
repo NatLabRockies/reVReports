@@ -1,0 +1,30 @@
+reVReports.logs
+===============
+
+.. automodule:: reVReports.logs
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      get_logger
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

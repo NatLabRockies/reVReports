@@ -1,0 +1,1028 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reVReports.data &#8212; reVReports 1.3.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=28d163b9"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/reVReports/data';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.3.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">reVReports 1.3.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">reVReports.data</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for reVReports.data</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data module</span>
+
+<span class="sd">Functions and classes for modifying/augmenting/translating data</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">reVReportsValueError</span>
+
+<span class="n">ORDERED_REGIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Pacific&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;California&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Southwest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Mountain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;South Central&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">NLR_REGIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Oregon&quot;</span><span class="p">:</span> <span class="s2">&quot;Pacific&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Washington&quot;</span><span class="p">:</span> <span class="s2">&quot;Pacific&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Colorado&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Idaho&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Montana&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wyoming&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Iowa&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Kansas&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Missouri&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Minnesota&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Nebraska&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;North Dakota&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;South Dakota&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Plains&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Illinois&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Indiana&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Michigan&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Ohio&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Wisconsin&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Connecticut&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;New Jersey&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;New York&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Maine&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;New Hampshire&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Massachusetts&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rhode Island&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rhode Island and Providence Plantations&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Vermont&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;California&quot;</span><span class="p">:</span> <span class="s2">&quot;California&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Arizona&quot;</span><span class="p">:</span> <span class="s2">&quot;Southwest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Nevada&quot;</span><span class="p">:</span> <span class="s2">&quot;Southwest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;New Mexico&quot;</span><span class="p">:</span> <span class="s2">&quot;Southwest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Utah&quot;</span><span class="p">:</span> <span class="s2">&quot;Southwest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Arkansas&quot;</span><span class="p">:</span> <span class="s2">&quot;South Central&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Louisiana&quot;</span><span class="p">:</span> <span class="s2">&quot;South Central&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Oklahoma&quot;</span><span class="p">:</span> <span class="s2">&quot;South Central&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Texas&quot;</span><span class="p">:</span> <span class="s2">&quot;South Central&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Alabama&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Delaware&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;District of Columbia&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Florida&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Georgia&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Kentucky&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Maryland&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Mississippi&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;North Carolina&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;South Carolina&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Tennessee&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Virginia&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;West Virginia&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="augment_sc_df">
+<a class="viewcode-back" href="../../_autosummary/reVReports.data.augment_sc_df.html#reVReports.data.augment_sc_df">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">augment_sc_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">scenario_name</span><span class="p">,</span>
+    <span class="n">scenario_number</span><span class="p">,</span>
+    <span class="n">tech</span><span class="p">,</span>
+    <span class="n">lcoe_all_in_col</span><span class="o">=</span><span class="s2">&quot;lcoe_all_in_usd_per_mwh&quot;</span><span class="p">,</span>
+    <span class="n">cf_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Augment an input supply curve dataframe</span>
+
+<span class="sd">    This function augments an input supply curve dataframe with</span>
+<span class="sd">    additional columns needed for standard plots. This function is</span>
+<span class="sd">    intended for use on supply curves created with reV version ≥ 0.14.5.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        Input supply curve dataframe.</span>
+<span class="sd">    scenario_name : str</span>
+<span class="sd">        Name of the scenario associated with the supply curve</span>
+<span class="sd">    scenario_number : int</span>
+<span class="sd">        Number of the scenario. This is used to control ordering if</span>
+<span class="sd">        multiple scenarios are being plotted. Scenarios will be ordered</span>
+<span class="sd">        based on ascending order of this input value (i.e., if you want</span>
+<span class="sd">        this scenario to plot first, set scenario_number to 0 and</span>
+<span class="sd">        subsequent scenarios to 1, 2, etc.)</span>
+<span class="sd">    tech : str</span>
+<span class="sd">        The technology of the input supply curves. Must be either `wind`</span>
+<span class="sd">        or `pv`.</span>
+<span class="sd">    lcoe_all_in_col : str, default=&quot;lcoe_all_in_usd_per_mwh&quot;</span>
+<span class="sd">        Column name that represents the All-in LCOE cost values.</span>
+<span class="sd">        By default, ``&quot;lcoe_all_in_usd_per_mwh&quot;``.</span>
+<span class="sd">    cf_col : str, default=None</span>
+<span class="sd">        Name of column storing the capacity factor values. By default,</span>
+<span class="sd">        this is set to ``None``, and defaults will be automatically set</span>
+<span class="sd">        based on the input technology (e.g., &quot;capacity_factor_dc&quot; for</span>
+<span class="sd">        &quot;pv&quot;, &quot;capacity_factor_ac&quot; for &quot;wind&quot;, &quot;osw&quot;, and &quot;geo&quot;)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        Augmented dataframe with additional columns for the Scenario,</span>
+<span class="sd">        scenario_number, and multiple additional quantitative results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># add standard named capacity_mw column</span>
+    <span class="k">if</span> <span class="n">tech</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;wind&quot;</span><span class="p">,</span> <span class="s2">&quot;osw&quot;</span><span class="p">}:</span>
+        <span class="n">capacity_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_ac_mw&quot;</span>
+        <span class="n">default_cf_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_factor_ac&quot;</span>
+    <span class="k">elif</span> <span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;pv&quot;</span><span class="p">:</span>
+        <span class="n">capacity_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_dc_mw&quot;</span>
+        <span class="n">default_cf_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_factor_dc&quot;</span>
+    <span class="k">elif</span> <span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;geo&quot;</span><span class="p">:</span>
+        <span class="n">capacity_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_ac_mw&quot;</span>
+        <span class="n">default_cf_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_factor_ac&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid input: tech=</span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Valid options are: [&#39;wind&#39;, &#39;pv&#39;, &#39;osw&#39;, &#39;geo&#39;].&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">reVReportsValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cf_col</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cf_col</span> <span class="o">=</span> <span class="n">default_cf_col</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity_mw&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">capacity_col</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cf_col</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Scenario&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_name</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;scenario_number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_number</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity_density&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity_mw&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;area_developable_sq_km&quot;</span><span class="p">]</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="n">lcoe_all_in_col</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;lcot_pct_lcoe&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;lcot_usd_per_mwh&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">lcoe_all_in_col</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cost_interconnection_usd_per_mw&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cost_spur_usd_per_mw_ac&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cost_poi_usd_per_mw_ac&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cumul_capacit_gw&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;capacity_mw&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cumul_aep_twh&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;annual_energy_site_mwh&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cumul_area_sq_km&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;area_developable_sq_km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;nlr_region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">NLR_REGIONS</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;nlr_region_cumul_capacit_gw&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;nlr_region&quot;</span><span class="p">)[</span><span class="s2">&quot;capacity_mw&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="check_files_match">
+<a class="viewcode-back" href="../../_autosummary/reVReports.data.check_files_match.html#reVReports.data.check_files_match">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_files_match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">dir_1_path</span><span class="p">,</span> <span class="n">dir_2_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify that the files in two folders match</span>
+
+<span class="sd">    Files are filtered by the specified pattern and the contents of the</span>
+<span class="sd">    two folders are searched recursively. Only the names of the files</span>
+<span class="sd">    and their relative paths within the folders are compared - contents</span>
+<span class="sd">    of the files are not checked.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pattern : str</span>
+<span class="sd">        File pattern used for filtering files in the specified folders.</span>
+<span class="sd">    dir_1_path, dir_2_path : path-like</span>
+<span class="sd">        Path to the first and second directory, respectively.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        Returns a tuple with two elements: the first element is a</span>
+<span class="sd">        boolean indicating whether the files in the two folders match</span>
+<span class="sd">        and the second is a list of differences between the two folders</span>
+<span class="sd">        (if applicable). If the files match, the list will be empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">output_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">dir_1_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dir_1_path</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">expected_output_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">dir_2_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dir_2_path</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">difference</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expected_output_files</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">difference</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">difference</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Alliance for Energy Innovation, LLC and Root Geospatial LLC.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

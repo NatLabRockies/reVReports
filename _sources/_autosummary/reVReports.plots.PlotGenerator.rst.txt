@@ -1,0 +1,36 @@
+reVReports.plots.PlotGenerator
+==============================
+
+.. currentmodule:: reVReports.plots
+
+.. autoclass:: PlotGenerator
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PlotGenerator.build_box_plots
+      ~PlotGenerator.build_capacity_by_region_bar_chart
+      ~PlotGenerator.build_histograms
+      ~PlotGenerator.build_regional_box_plots
+      ~PlotGenerator.build_supply_curves
+      ~PlotGenerator.build_transmission_box_plots
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PlotGenerator.all_df
+      ~PlotGenerator.scenario_dfs
+   
+   

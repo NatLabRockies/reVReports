@@ -1,0 +1,6 @@
+reVReports.data.augment\_sc\_df
+===============================
+
+.. currentmodule:: reVReports.data
+
+.. autofunction:: augment_sc_df

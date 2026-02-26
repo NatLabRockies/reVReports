@@ -1,0 +1,32 @@
+reVReports.characterizations
+============================
+
+.. automodule:: reVReports.characterizations
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      recast_categories
+      unpack_characterizations
+      validate_characterization_remapper
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

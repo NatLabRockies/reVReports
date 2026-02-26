@@ -1,0 +1,6 @@
+reVReports.plots.make\_bar\_plot
+================================
+
+.. currentmodule:: reVReports.plots
+
+.. autofunction:: make_bar_plot

@@ -1,0 +1,30 @@
+reVReports.configs.Plots
+========================
+
+.. currentmodule:: reVReports.configs
+
+.. autoclass:: Plots
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Plots.site_lcoe_max
+      ~Plots.total_lcoe_max
+   
+   

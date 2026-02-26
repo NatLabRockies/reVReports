@@ -1,0 +1,6 @@
+reVReports.data.check\_files\_match
+===================================
+
+.. currentmodule:: reVReports.data
+
+.. autofunction:: check_files_match

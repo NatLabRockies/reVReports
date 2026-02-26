@@ -1,0 +1,6 @@
+reVReports.characterizations.recast\_categories
+===============================================
+
+.. currentmodule:: reVReports.characterizations
+
+.. autofunction:: recast_categories

@@ -1,0 +1,32 @@
+reVReports.configs.MapVar
+=========================
+
+.. currentmodule:: reVReports.configs
+
+.. autoclass:: MapVar
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MapVar.column
+      ~MapVar.breaks
+      ~MapVar.cmap
+      ~MapVar.legend_title
+   
+   

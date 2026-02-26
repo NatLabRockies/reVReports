@@ -1,0 +1,23 @@
+reVReports.configs.BaseModelStrict
+==================================
+
+.. currentmodule:: reVReports.configs
+
+.. autoclass:: BaseModelStrict
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+   
+   
+
+   
+   
+   

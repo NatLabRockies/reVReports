@@ -1,0 +1,1616 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reVReports.maps &#8212; reVReports 1.3.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=28d163b9"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/reVReports/maps';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.3.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">reVReports 1.3.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">reVReports.maps</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for reVReports.maps</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;reVReports map generation functions&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geoplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gplt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">VALID_TECHS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.utilities.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">DPI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.utilities.maps</span><span class="w"> </span><span class="kn">import</span> <span class="n">BOUNDARIES</span><span class="p">,</span> <span class="n">map_geodataframe_column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.utilities.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMALL_SIZE</span><span class="p">,</span> <span class="n">BIGGER_SIZE</span><span class="p">,</span> <span class="n">RC_FONT_PARAMS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">reVReportsValueError</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">MANUALLY_STYLED_SCENARIO_LIMIT</span> <span class="o">=</span> <span class="mi">4</span>
+
+
+<div class="viewcode-block" id="MapData">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.MapData.html#reVReports.maps.MapData">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MapData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare map inputs from scenario supply curve data&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">cap_col</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        config : object</span>
+<span class="sd">            Map configuration with scenario metadata.</span>
+<span class="sd">        cap_col : str</span>
+<span class="sd">            Column used for project capacity calculations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cap_col</span> <span class="o">=</span> <span class="n">cap_col</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over scenario names and GeoDataFrames&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario_dfs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;object: Map configuration instance&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
+
+<div class="viewcode-block" id="MapData.scenario_dfs">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.MapData.html#reVReports.maps.MapData.scenario_dfs">[docs]</a>
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scenario_dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dict: Scenario GeoDataFrames keyed by name&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Loading and augmenting supply curve data&quot;</span><span class="p">)</span>
+        <span class="n">scenario_dfs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">scenarios</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">scenarios</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">scenario_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+            <span class="n">scenario_sub_df</span> <span class="o">=</span> <span class="n">scenario_df</span><span class="p">[</span>
+                <span class="n">scenario_df</span><span class="p">[</span><span class="s2">&quot;capacity_ac_mw&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="n">supply_curve_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+                <span class="n">scenario_sub_df</span><span class="p">,</span>
+                <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">scenario_sub_df</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">scenario_sub_df</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+                <span class="p">),</span>
+                <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">supply_curve_gdf</span><span class="p">[</span><span class="s2">&quot;capacity_density&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">supply_curve_gdf</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cap_col</span><span class="p">]</span>
+                <span class="o">/</span> <span class="n">supply_curve_gdf</span><span class="p">[</span><span class="s2">&quot;area_developable_sq_km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">scenario_dfs</span><span class="p">[</span><span class="n">scenario</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">supply_curve_gdf</span>
+
+        <span class="k">return</span> <span class="n">scenario_dfs</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BaseMapGenerator">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseMapGenerator</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate geospatial visualizations from prepared datasets&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_data</span><span class="p">,</span> <span class="n">map_layout</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        map_data : MapData</span>
+<span class="sd">            Prepared map data container.</span>
+<span class="sd">        map_layout : str, default=&quot;horizontal&quot;</span>
+<span class="sd">            Map layout for scenario grids.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_map_data</span> <span class="o">=</span> <span class="n">map_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_map_layout</span> <span class="o">=</span> <span class="n">map_layout</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_scenarios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Number of configured scenarios&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_map_data</span><span class="o">.</span><span class="n">scenario_dfs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">map_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Map layout for scenario grids&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_layout</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Number of columns in map output&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_layout</span> <span class="o">==</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">2</span>
+
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span><span class="p">))))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Number of rows in map output&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">))</span>
+
+<div class="viewcode-block" id="BaseMapGenerator.build_maps">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.BaseMapGenerator.html#reVReports.maps.BaseMapGenerator.build_maps">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_maps</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">map_vars</span><span class="p">,</span>
+        <span class="n">out_directory</span><span class="p">,</span>
+        <span class="n">dpi</span><span class="o">=</span><span class="n">DPI</span><span class="p">,</span>
+        <span class="n">point_size</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">prefix_outputs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create scenario maps for each requested variable</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        map_vars : dict</span>
+<span class="sd">            Mapping of column names to styling metadata.</span>
+<span class="sd">        out_directory : pathlib.Path</span>
+<span class="sd">            Directory for saved figures.</span>
+<span class="sd">        dpi : int, default=300</span>
+<span class="sd">            Output resolution for saved figures.</span>
+<span class="sd">        point_size : float, optional</span>
+<span class="sd">            Marker size for scenario points, by default 2.0.</span>
+<span class="sd">        prefix_outputs : bool, optional</span>
+<span class="sd">            Whether to prefix output filenames with ``&#39;map_&#39;``,</span>
+<span class="sd">            by default ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">6.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Creating maps&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">map_var</span><span class="p">,</span> <span class="n">map_settings</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">map_vars</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">RC_FONT_PARAMS</span><span class="p">):</span>
+                <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+                    <span class="n">ncols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">,</span>
+                    <span class="n">nrows</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span><span class="p">,</span>
+                    <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span>
+                    <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">gplt</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(</span>
+                            <span class="n">central_longitude</span><span class="o">=</span><span class="n">BOUNDARIES</span><span class="o">.</span><span class="n">center_lon</span><span class="p">,</span>
+                            <span class="n">central_latitude</span><span class="o">=</span><span class="n">BOUNDARIES</span><span class="o">.</span><span class="n">center_lat</span><span class="p">,</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+                <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+                <span class="n">legend_axis</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">scenario_df</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_map_data</span>
+                <span class="p">):</span>
+                    <span class="k">if</span> <span class="n">map_var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scenario_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                        <span class="n">err</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">map_var</span><span class="si">}</span><span class="s2"> column not found in one or more input &quot;</span>
+                            <span class="s2">&quot;supply curves. Consider using the `exclude_maps` &quot;</span>
+                            <span class="s2">&quot;configuration option to skip map generation for &quot;</span>
+                            <span class="s2">&quot;this column.&quot;</span>
+                        <span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                    <span class="n">panel</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">panel</span> <span class="o">=</span> <span class="n">map_geodataframe_column</span><span class="p">(</span>
+                        <span class="n">scenario_df</span><span class="p">,</span>
+                        <span class="n">map_var</span><span class="p">,</span>
+                        <span class="n">color_map</span><span class="o">=</span><span class="n">map_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cmap&quot;</span><span class="p">),</span>
+                        <span class="n">breaks</span><span class="o">=</span><span class="n">map_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;breaks&quot;</span><span class="p">),</span>
+                        <span class="n">map_title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">legend_title</span><span class="o">=</span><span class="n">map_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;legend_title&quot;</span><span class="p">),</span>
+                        <span class="n">background_df</span><span class="o">=</span><span class="n">BOUNDARIES</span><span class="o">.</span><span class="n">background_gdf</span><span class="p">,</span>
+                        <span class="n">boundaries_df</span><span class="o">=</span><span class="n">BOUNDARIES</span><span class="o">.</span><span class="n">boundaries_single_part_gdf</span><span class="p">,</span>
+                        <span class="n">extent</span><span class="o">=</span><span class="n">BOUNDARIES</span><span class="o">.</span><span class="n">map_extent</span><span class="p">,</span>
+                        <span class="n">layer_kwargs</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="n">point_size</span><span class="p">,</span>
+                            <span class="s2">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                            <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="n">legend_kwargs</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;frameon&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                            <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+                            <span class="s2">&quot;loc&quot;</span><span class="p">:</span> <span class="s2">&quot;center left&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="n">legend</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span><span class="p">),</span>
+                        <span class="n">ax</span><span class="o">=</span><span class="n">panel</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">panel</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">panel</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.88</span><span class="p">)</span>
+                    <span class="n">legend_axis</span> <span class="o">=</span> <span class="n">panel</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_adjust_panel</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">map_settings</span><span class="p">,</span> <span class="n">legend_axis</span><span class="p">)</span>
+                <span class="n">out_fp</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;map_</span><span class="si">{</span><span class="n">map_var</span><span class="si">}</span><span class="s2">.png&quot;</span>
+                    <span class="k">if</span> <span class="n">prefix_outputs</span>
+                    <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">map_var</span><span class="si">}</span><span class="s2">.png&quot;</span>
+                <span class="p">)</span>
+                <span class="n">out_image_path</span> <span class="o">=</span> <span class="n">out_directory</span> <span class="o">/</span> <span class="n">out_fp</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out_image_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_adjust_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">map_settings</span><span class="p">,</span> <span class="n">legend_axis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust panel layout and legend for styling&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+
+<div class="viewcode-block" id="ManualStyledMapGenerator">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.ManualStyledMapGenerator.html#reVReports.maps.ManualStyledMapGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ManualStyledMapGenerator</span><span class="p">(</span><span class="n">BaseMapGenerator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply manual layout rules for small scenario counts&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_adjust_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">map_settings</span><span class="p">,</span> <span class="n">legend_axis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust panel layout and legend for manual styling&quot;&quot;&quot;</span>
+        <span class="n">n_panels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="n">min_xcoord</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.04</span>
+        <span class="n">mid_xcoord</span> <span class="o">=</span> <span class="mf">0.465</span>
+        <span class="n">min_ycoord</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">mid_ycoord</span> <span class="o">=</span> <span class="mf">0.475</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="n">panel_width</span> <span class="o">=</span> <span class="mf">0.6</span>
+            <span class="n">panel_height</span> <span class="o">=</span> <span class="mf">0.52</span>
+            <span class="n">panel_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel_width</span><span class="p">,</span> <span class="n">panel_height</span><span class="p">]</span>
+
+            <span class="n">lower_lefts</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="n">mid_xcoord</span><span class="p">,</span> <span class="n">min_ycoord</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">min_xcoord</span><span class="p">,</span> <span class="n">min_ycoord</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">mid_xcoord</span><span class="p">,</span> <span class="n">mid_ycoord</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">min_xcoord</span><span class="p">,</span> <span class="n">mid_ycoord</span><span class="p">],</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_panels</span><span class="p">):</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="n">lower_lefts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="o">-</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">coords</span> <span class="o">+</span> <span class="n">panel_dims</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">([</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">([</span><span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_correct_legend_manual</span><span class="p">(</span>
+            <span class="n">fig</span><span class="p">,</span>
+            <span class="n">map_settings</span><span class="p">,</span>
+            <span class="n">ax</span><span class="p">,</span>
+            <span class="n">n_panels</span><span class="p">,</span>
+            <span class="n">mid_xcoord</span><span class="p">,</span>
+            <span class="n">min_ycoord</span><span class="p">,</span>
+            <span class="n">legend_axis</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_correct_legend_manual</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">,</span>
+        <span class="n">map_settings</span><span class="p">,</span>
+        <span class="n">ax</span><span class="p">,</span>
+        <span class="n">n_panels</span><span class="p">,</span>
+        <span class="n">mid_xcoord</span><span class="p">,</span>
+        <span class="n">min_ycoord</span><span class="p">,</span>
+        <span class="n">legend_axis</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Position the consolidated legend panel&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">legend_axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span> <span class="o">&lt;</span> <span class="n">n_panels</span><span class="p">:</span>
+            <span class="n">extra_panel</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">legend_panel_position</span> <span class="o">=</span> <span class="n">extra_panel</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">extra_panel</span><span class="p">)</span>
+            <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">BIGGER_SIZE</span>
+            <span class="n">legend_loc</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span>
+            <span class="n">legend_cols</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">SMALL_SIZE</span>
+            <span class="n">legend_loc</span> <span class="o">=</span> <span class="s2">&quot;center left&quot;</span>
+            <span class="n">legend_cols</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># noqa: PLR2004</span>
+                <span class="n">legend_panel_position</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">mid_xcoord</span> <span class="o">-</span> <span class="mf">0.06</span><span class="p">,</span>
+                    <span class="n">min_ycoord</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">,</span>
+                    <span class="mf">0.2</span><span class="p">,</span>
+                    <span class="mf">0.2</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">legend_panel_position</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">mid_xcoord</span> <span class="o">-</span> <span class="mf">0.06</span><span class="p">,</span>
+                    <span class="n">min_ycoord</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span>
+                    <span class="mf">0.2</span><span class="p">,</span>
+                    <span class="mf">0.2</span><span class="p">,</span>
+                <span class="p">]</span>
+
+        <span class="n">legend</span> <span class="o">=</span> <span class="n">legend_axis</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span>
+        <span class="n">legend_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">legend</span><span class="o">.</span><span class="n">texts</span><span class="p">]</span>
+        <span class="n">legend_handles</span> <span class="o">=</span> <span class="n">legend</span><span class="o">.</span><span class="n">legend_handles</span>
+        <span class="n">legend</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+
+        <span class="n">legend_panel</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">frame_on</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="n">legend_panel_position</span><span class="p">)</span>
+
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">legend_handles</span><span class="p">,</span>
+            <span class="n">legend_texts</span><span class="p">,</span>
+            <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">loc</span><span class="o">=</span><span class="n">legend_loc</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">map_settings</span><span class="p">[</span><span class="s2">&quot;legend_title&quot;</span><span class="p">],</span>
+            <span class="n">ncol</span><span class="o">=</span><span class="n">legend_cols</span><span class="p">,</span>
+            <span class="n">handletextpad</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">columnspacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="n">legend_font_size</span><span class="p">,</span>
+            <span class="n">title_fontproperties</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">legend_font_size</span><span class="p">,</span>
+                <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AutomaticallyStyledMapGenerator">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.AutomaticallyStyledMapGenerator.html#reVReports.maps.AutomaticallyStyledMapGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AutomaticallyStyledMapGenerator</span><span class="p">(</span><span class="n">BaseMapGenerator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply automatic layout rules for larger scenario grids&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_adjust_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">map_settings</span><span class="p">,</span> <span class="n">legend_axis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Position legend for layouts with more than four scenarios&quot;&quot;&quot;</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span>
+            <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">right</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">top</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">legend_axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">legend</span> <span class="o">=</span> <span class="n">legend_axis</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">legend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">legend_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">legend</span><span class="o">.</span><span class="n">texts</span><span class="p">]</span>
+        <span class="n">legend_handles</span> <span class="o">=</span> <span class="n">legend</span><span class="o">.</span><span class="n">legend_handles</span>
+        <span class="n">legend</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+
+        <span class="n">axes_flat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">used_axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span><span class="p">])</span>
+        <span class="n">extra_axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span> <span class="p">:])</span>
+        <span class="n">has_extra_panel</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">extra_axes</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_layout</span> <span class="o">==</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">has_extra_panel</span><span class="p">:</span>
+                <span class="n">legend_cols</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">BIGGER_SIZE</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">legend_cols</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">SMALL_SIZE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">legend_cols</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">))</span>
+            <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">SMALL_SIZE</span>
+
+        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_layout_config</span><span class="p">(</span><span class="n">has_extra_panel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_position_axes</span><span class="p">(</span><span class="n">used_axes</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+        <span class="n">legend_panel</span> <span class="o">=</span> <span class="n">_prepare_legend_panel</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">extra_axes</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">legend_handles</span><span class="p">,</span>
+            <span class="n">legend_texts</span><span class="p">,</span>
+            <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">map_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;legend_title&quot;</span><span class="p">),</span>
+            <span class="n">ncol</span><span class="o">=</span><span class="n">legend_cols</span><span class="p">,</span>
+            <span class="n">handletextpad</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">columnspacing</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="n">legend_font_size</span><span class="p">,</span>
+            <span class="n">title_fontproperties</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">legend_font_size</span><span class="p">,</span>
+                <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_layout_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">has_extra_panel</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return layout settings for tightly packed panels&quot;&quot;&quot;</span>
+
+        <span class="n">base</span> <span class="o">=</span> <span class="n">_base_dimensions</span><span class="p">(</span><span class="n">has_extra_panel</span><span class="p">)</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axis_dimensions</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_legend_geometry</span><span class="p">(</span><span class="n">has_extra_panel</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dims</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;left_margin&quot;</span><span class="p">:</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;left_margin&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;bottom_margin&quot;</span><span class="p">:</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;bottom_margin&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;legend_left&quot;</span><span class="p">:</span> <span class="n">legend</span><span class="p">[</span><span class="s2">&quot;legend_left&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;legend_width&quot;</span><span class="p">:</span> <span class="n">legend</span><span class="p">[</span><span class="s2">&quot;legend_width&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;legend_bottom&quot;</span><span class="p">:</span> <span class="n">legend</span><span class="p">[</span><span class="s2">&quot;legend_bottom&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;legend_height&quot;</span><span class="p">:</span> <span class="n">legend</span><span class="p">[</span><span class="s2">&quot;legend_height&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;col_width&quot;</span><span class="p">:</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;col_width&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;row_height&quot;</span><span class="p">:</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;row_height&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;col_step&quot;</span><span class="p">:</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;col_step&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;row_step&quot;</span><span class="p">:</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;row_step&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;legend_in_panel&quot;</span><span class="p">:</span> <span class="n">has_extra_panel</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_axis_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derive panel dimensions with controlled overlap&quot;&quot;&quot;</span>
+
+        <span class="n">col_overlap</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="n">row_overlap</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="n">safe_cols</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">safe_rows</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">col_width</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">base</span><span class="p">[</span><span class="s2">&quot;content_right&quot;</span><span class="p">]</span>
+            <span class="o">-</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;left_margin&quot;</span><span class="p">]</span>
+            <span class="o">+</span> <span class="n">col_overlap</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">safe_cols</span>
+        <span class="n">row_height</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">base</span><span class="p">[</span><span class="s2">&quot;content_height&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">row_overlap</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">safe_rows</span>
+
+        <span class="n">col_step</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">col_width</span> <span class="o">-</span> <span class="n">col_overlap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">row_step</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">row_height</span> <span class="o">-</span> <span class="n">row_overlap</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;col_width&quot;</span><span class="p">:</span> <span class="n">col_width</span><span class="p">,</span>
+            <span class="s2">&quot;row_height&quot;</span><span class="p">:</span> <span class="n">row_height</span><span class="p">,</span>
+            <span class="s2">&quot;col_step&quot;</span><span class="p">:</span> <span class="n">col_step</span><span class="p">,</span>
+            <span class="s2">&quot;row_step&quot;</span><span class="p">:</span> <span class="n">row_step</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_legend_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">has_extra_panel</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine legend placement for automatic layouts&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">has_extra_panel</span><span class="p">:</span>
+            <span class="n">legend_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_scenarios</span>
+            <span class="n">legend_col</span> <span class="o">=</span> <span class="n">legend_index</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span>
+            <span class="n">legend_row</span> <span class="o">=</span> <span class="n">legend_index</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span>
+            <span class="n">legend_left</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;left_margin&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">legend_col</span> <span class="o">*</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;col_step&quot;</span><span class="p">]</span>
+            <span class="n">legend_bottom</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">base</span><span class="p">[</span><span class="s2">&quot;bottom_margin&quot;</span><span class="p">]</span>
+                <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">legend_row</span><span class="p">)</span> <span class="o">*</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;row_step&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">legend_width</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;col_width&quot;</span><span class="p">]</span>
+            <span class="n">legend_height</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="s2">&quot;row_height&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">legend_left</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;legend_left&quot;</span><span class="p">]</span>
+            <span class="n">legend_bottom</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;bottom_margin&quot;</span><span class="p">]</span>
+            <span class="n">legend_width</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;legend_width&quot;</span><span class="p">]</span>
+            <span class="n">legend_height</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;content_height&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;legend_left&quot;</span><span class="p">:</span> <span class="n">legend_left</span><span class="p">,</span>
+            <span class="s2">&quot;legend_bottom&quot;</span><span class="p">:</span> <span class="n">legend_bottom</span><span class="p">,</span>
+            <span class="s2">&quot;legend_width&quot;</span><span class="p">:</span> <span class="n">legend_width</span><span class="p">,</span>
+            <span class="s2">&quot;legend_height&quot;</span><span class="p">:</span> <span class="n">legend_height</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_position_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">panels</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set subplot bounds for automatic layout&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">panel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">panels</span><span class="p">):</span>
+            <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span><span class="p">)</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;left_margin&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;col_step&quot;</span><span class="p">]</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;bottom_margin&quot;</span><span class="p">]</span>
+                <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">row</span><span class="p">)</span> <span class="o">*</span> <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;row_step&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">panel</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;col_width&quot;</span><span class="p">],</span>
+                    <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;row_height&quot;</span><span class="p">],</span>
+                <span class="p">]</span>
+            <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="generate_maps_from_config">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.generate_maps_from_config.html#reVReports.maps.generate_maps_from_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_maps_from_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">out_path</span><span class="p">,</span> <span class="n">dpi</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create map graphics for user-configured scenarios</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config : object</span>
+<span class="sd">        Map configuration with scenario metadata.</span>
+<span class="sd">    out_path : pathlib.Path</span>
+<span class="sd">        Directory for generated map outputs.</span>
+<span class="sd">    dpi : int</span>
+<span class="sd">        Output resolution for saved figures.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cap_col</span><span class="p">,</span> <span class="n">point_size</span><span class="p">,</span> <span class="n">map_vars</span> <span class="o">=</span> <span class="n">configure_map_params</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="n">map_data</span> <span class="o">=</span> <span class="n">MapData</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">cap_col</span><span class="o">=</span><span class="n">cap_col</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">map_data</span><span class="o">.</span><span class="n">scenario_dfs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MANUALLY_STYLED_SCENARIO_LIMIT</span><span class="p">:</span>
+        <span class="n">plotter</span> <span class="o">=</span> <span class="n">ManualStyledMapGenerator</span><span class="p">(</span>
+            <span class="n">map_data</span><span class="p">,</span>
+            <span class="n">map_layout</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">map_layout</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plotter</span> <span class="o">=</span> <span class="n">AutomaticallyStyledMapGenerator</span><span class="p">(</span>
+            <span class="n">map_data</span><span class="p">,</span>
+            <span class="n">map_layout</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">map_layout</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">plotter</span><span class="o">.</span><span class="n">build_maps</span><span class="p">(</span>
+        <span class="n">map_vars</span><span class="p">,</span>
+        <span class="n">out_path</span><span class="p">,</span>
+        <span class="n">dpi</span><span class="p">,</span>
+        <span class="n">point_size</span><span class="o">=</span><span class="n">point_size</span><span class="p">,</span>
+        <span class="n">prefix_outputs</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">prefix_outputs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="configure_map_params">
+<a class="viewcode-back" href="../../_autosummary/reVReports.maps.configure_map_params.html#reVReports.maps.configure_map_params">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">configure_map_params</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure map parameters based on technology settings</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config : object</span>
+<span class="sd">        Map configuration containing technology attributes.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        Capacity column, point size, and mapping configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Configuring map settings&quot;</span><span class="p">)</span>
+    <span class="n">map_vars</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">lcoe_all_in_col</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+            <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;All-in LCOE ($/MWh)&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">lcoe_site_col</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+            <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Project LCOE ($/MWh)&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;lcot_usd_per_mwh&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+            <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;LCOT ($/MWh)&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;area_developable_sq_km&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+            <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;BuPu&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Developable Area (sq km)&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">cf_col</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cf_col</span> <span class="ow">or</span> <span class="s2">&quot;capacity_factor_ac&quot;</span>
+
+    <span class="n">point_size</span> <span class="o">=</span> <span class="mf">2.0</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;pv&quot;</span><span class="p">:</span>
+        <span class="n">cap_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_dc_mw&quot;</span>
+        <span class="n">map_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;capacity_dc_mw&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity DC (MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;capacity_ac_mw&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity AC (MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">cf_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Factor&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;wind&quot;</span><span class="p">:</span>
+        <span class="n">cap_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_ac_mw&quot;</span>
+        <span class="n">map_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;capacity_ac_mw&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">275</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity (MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;capacity_density&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Density (MW/sq km)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">cf_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Factor&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;losses_wakes_pct&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;Purples&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Wake Losses (%)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;osw&quot;</span><span class="p">:</span>
+        <span class="n">point_size</span> <span class="o">=</span> <span class="mf">1.5</span>
+        <span class="n">cap_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_ac_mw&quot;</span>
+        <span class="n">map_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;capacity_ac_mw&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;PuBu&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity (MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;capacity_density&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;PuBu&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Density (MW/sq km)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">cf_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;PuBu&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Factor&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;area_developable_sq_km&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">250</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;BuPu&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Developable Area (sq km)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">lcoe_all_in_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;All-in LCOE ($/MWh)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">lcoe_site_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Project LCOE ($/MWh)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;lcot_usd_per_mwh&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;LCOT ($/MWh)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;cost_export_usd_per_mw_ac&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="mi">500_000</span><span class="p">,</span>
+                        <span class="mi">600_000</span><span class="p">,</span>
+                        <span class="mi">700_000</span><span class="p">,</span>
+                        <span class="mi">800_000</span><span class="p">,</span>
+                        <span class="mi">900_000</span><span class="p">,</span>
+                        <span class="mi">1_000_000</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Export Cable ($/MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;dist_export_km&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlGn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Export Cable Distance (km)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;losses_wakes_pct&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;Purples&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Wake Losses (%)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;geo&quot;</span><span class="p">:</span>
+        <span class="n">cap_col</span> <span class="o">=</span> <span class="s2">&quot;capacity_ac_mw&quot;</span>
+        <span class="n">map_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;capacity_ac_mw&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity (MW)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;capacity_density&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Density (MW/sq km)&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">cf_col</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;breaks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.9925</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">,</span> <span class="mf">0.9975</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">],</span>
+                    <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="s2">&quot;YlOrRd&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;legend_title&quot;</span><span class="p">:</span> <span class="s2">&quot;Capacity Factor&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid input: tech=</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">tech</span><span class="si">}</span><span class="s2">. Valid options are: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">VALID_TECHS</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">reVReportsValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="c1"># add/modify map variables based on input config parameters</span>
+    <span class="k">for</span> <span class="n">map_var</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">map_vars</span><span class="p">:</span>
+        <span class="n">map_var_data</span> <span class="o">=</span> <span class="n">map_var</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">map_var_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;column&quot;</span><span class="p">)</span>
+        <span class="n">map_vars</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_var_data</span>
+
+    <span class="c1"># remove map vars that are in the exclude list</span>
+    <span class="k">for</span> <span class="n">exclude_map</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">exclude_maps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exclude_map</span> <span class="ow">in</span> <span class="n">map_vars</span><span class="p">:</span>
+            <span class="n">map_vars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">exclude_map</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cap_col</span><span class="p">,</span> <span class="n">point_size</span><span class="p">,</span> <span class="n">map_vars</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_base_dimensions</span><span class="p">(</span><span class="n">has_extra_panel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate base margins for automatic layouts&quot;&quot;&quot;</span>
+
+    <span class="n">left_margin</span> <span class="o">=</span> <span class="mf">0.002</span>
+    <span class="n">bottom_margin</span> <span class="o">=</span> <span class="mf">0.006</span>
+    <span class="n">top_limit</span> <span class="o">=</span> <span class="mf">0.995</span>
+    <span class="n">legend_gap</span> <span class="o">=</span> <span class="mf">0.003</span>
+
+    <span class="k">if</span> <span class="n">has_extra_panel</span><span class="p">:</span>
+        <span class="n">content_right</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.002</span>
+        <span class="n">legend_left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">legend_width</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">legend_width</span> <span class="o">=</span> <span class="mf">0.095</span>
+        <span class="n">legend_left</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.01</span> <span class="o">-</span> <span class="n">legend_width</span>
+        <span class="n">content_right</span> <span class="o">=</span> <span class="n">legend_left</span> <span class="o">-</span> <span class="n">legend_gap</span>
+
+    <span class="n">content_height</span> <span class="o">=</span> <span class="n">top_limit</span> <span class="o">-</span> <span class="n">bottom_margin</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;left_margin&quot;</span><span class="p">:</span> <span class="n">left_margin</span><span class="p">,</span>
+        <span class="s2">&quot;bottom_margin&quot;</span><span class="p">:</span> <span class="n">bottom_margin</span><span class="p">,</span>
+        <span class="s2">&quot;content_height&quot;</span><span class="p">:</span> <span class="n">content_height</span><span class="p">,</span>
+        <span class="s2">&quot;content_right&quot;</span><span class="p">:</span> <span class="n">content_right</span><span class="p">,</span>
+        <span class="s2">&quot;legend_left&quot;</span><span class="p">:</span> <span class="n">legend_left</span><span class="p">,</span>
+        <span class="s2">&quot;legend_width&quot;</span><span class="p">:</span> <span class="n">legend_width</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_prepare_legend_panel</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">extra_axes</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide axis to render the automatic legend&quot;&quot;&quot;</span>
+
+    <span class="n">legend_bottom</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_bottom&quot;</span><span class="p">]</span>
+    <span class="n">legend_height</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_height&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">extra_axes</span><span class="p">:</span>
+        <span class="n">legend_panel</span> <span class="o">=</span> <span class="n">extra_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_left&quot;</span><span class="p">],</span>
+                <span class="n">legend_bottom</span><span class="p">,</span>
+                <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_width&quot;</span><span class="p">],</span>
+                <span class="n">legend_height</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">extra_axis</span> <span class="ow">in</span> <span class="n">extra_axes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">extra_axis</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">legend_panel</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_left&quot;</span><span class="p">],</span>
+                <span class="n">legend_bottom</span><span class="p">,</span>
+                <span class="n">layout</span><span class="p">[</span><span class="s2">&quot;legend_width&quot;</span><span class="p">],</span>
+                <span class="n">legend_height</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">legend_panel</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">legend_panel</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Alliance for Energy Innovation, LLC and Root Geospatial LLC.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

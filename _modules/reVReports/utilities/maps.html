@@ -1,0 +1,1227 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reVReports.utilities.maps &#8212; reVReports 1.3.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=28d163b9"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/tabs.js?v=3030b3cb"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/reVReports/utilities/maps';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.3.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">reVReports 1.3.3 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../misc/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_autosummary/reVReports.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../_cli/cli.html">
+    CLI reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../dev/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../glossary.html">
+    Glossary
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">reVReports.utilities.maps</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for reVReports.utilities.maps</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functionality for generating maps&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mapclassify</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patheffects</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleLineShadow</span><span class="p">,</span> <span class="n">Normal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geoplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gplt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">reVReports</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
+
+<span class="n">DEFAULT_BOUNDARIES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;ne_50m_admin_1_states_provinces_lakes_conus.geojson&quot;</span>
+<span class="p">)</span>
+<span class="n">DEFAULT_PROJECTION</span> <span class="o">=</span> <span class="n">gplt</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="YBFixedBounds">
+<a class="viewcode-back" href="../../../_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">YBFixedBounds</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class for use with a map classify classifier</span>
+
+<span class="sd">    This class can used to overwrite the ``yb`` property of a classifier</span>
+<span class="sd">    so that the ``.max()`` and ``.min()`` methods return preset values</span>
+<span class="sd">    rather than the maximum and minimum break labels corresponding to</span>
+<span class="sd">    the range of data.</span>
+
+<span class="sd">    This is used in ``map_supply_curve_column()`` to ensure that breaks</span>
+<span class="sd">    and colors shown in the legend are always consistent with the input</span>
+<span class="sd">    ``breaks`` rather than subject to change based on range of the input</span>
+<span class="sd">    ``column``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">input_array</span><span class="p">,</span> <span class="n">preset_max</span><span class="p">,</span> <span class="n">preset_min</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_array : numpy.ndarray</span>
+<span class="sd">            Input numpy array, typically sourced from the ``yb``</span>
+<span class="sd">            property of a mapclassify classifier.</span>
+<span class="sd">        preset_max : int</span>
+<span class="sd">            Maximum value to return when .max() is called. Typically</span>
+<span class="sd">            this should be set to the classifier ``k`` property, which</span>
+<span class="sd">            is the number of classes in the classifier.</span>
+<span class="sd">        preset_min : int, optional</span>
+<span class="sd">            Minimum value to return when .min() is called. Under most</span>
+<span class="sd">            circumstances, the default value (0) should be used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        YBFixedBounds</span>
+<span class="sd">            New instance of YBFixedBounds with present min() and max()</span>
+<span class="sd">            values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">input_array</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">array</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;_preset_max&quot;</span><span class="p">:</span> <span class="n">preset_max</span><span class="p">,</span>
+                <span class="s2">&quot;_preset_min&quot;</span><span class="p">:</span> <span class="n">preset_min</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+<div class="viewcode-block" id="YBFixedBounds.max">
+<a class="viewcode-back" href="../../../_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.max">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return preset maximum value&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preset_max</span></div>
+
+
+<div class="viewcode-block" id="YBFixedBounds.min">
+<a class="viewcode-back" href="../../../_autosummary/reVReports.utilities.maps.YBFixedBounds.html#reVReports.utilities.maps.YBFixedBounds.min">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return preset minimum value&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preset_min</span></div>
+</div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_BoundariesData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cached geographic boundary resources&quot;&quot;&quot;</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_boundaries_gdf_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;geopandas.GeoDataFrame: Raw boundary geometries&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">DEFAULT_BOUNDARIES</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_boundaries_dissolved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;shapely.Geometry: Dissolved boundary geometry&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_gdf_raw</span><span class="o">.</span><span class="n">union_all</span><span class="p">()</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">background_gdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;geopandas.GeoDataFrame: Boundaries for plotting background&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_dissolved</span><span class="p">]},</span>
+            <span class="n">crs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_gdf_raw</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">index_parts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boundaries_single_part_gdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;geopandas.GeoDataFrame: Single-part boundary geometries&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_gdf_raw</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">index_parts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">map_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;numpy.ndarray: Buffered extent for plotting&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_gdf</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">total_bounds</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">center_lon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Central longitude for map projections&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_dissolved</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">center_lat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Central latitude for map projections&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boundaries_dissolved</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+
+
+<span class="n">BOUNDARIES</span> <span class="o">=</span> <span class="n">_BoundariesData</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="map_geodataframe_column">
+<a class="viewcode-back" href="../../../_autosummary/reVReports.utilities.maps.map_geodataframe_column.html#reVReports.utilities.maps.map_geodataframe_column">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_geodataframe_column</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913, PLR0917</span>
+    <span class="n">data_df</span><span class="p">,</span>
+    <span class="n">column</span><span class="p">,</span>
+    <span class="n">color_map</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">breaks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">map_title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">legend_title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">background_df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">boundaries_df</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">extent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">boundaries_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">layer_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">legend_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">projection</span><span class="o">=</span><span class="n">DEFAULT_PROJECTION</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a cartographic quality map</span>
+
+<span class="sd">    The map symbolizes the values from an input geodataframe, optionally</span>
+<span class="sd">    including a background layer (e.g., CONUS landmass), a boundary</span>
+<span class="sd">    layer (e.g., state boundaries), and various map style elements.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_df : geopandas.geodataframe.GeoDataFrame</span>
+<span class="sd">        Input GeoDataFrame with values in ``column`` to map. Input</span>
+<span class="sd">        geometry type must be one of: ``Point``, ``Polygon``, or</span>
+<span class="sd">        ``MultiPolygon``. If ``background_df`` and ``extent`` are both</span>
+<span class="sd">        ``None``, the extent of this dataframe will set the overall map</span>
+<span class="sd">        extent.</span>
+<span class="sd">    column : str</span>
+<span class="sd">        Name of the column in ``data_df`` to plot.</span>
+<span class="sd">    color_map : str or matplotlib.colors.Colormap, default=&quot;viridis&quot;</span>
+<span class="sd">        Colors to use for mapping the values of ``column``. This can</span>
+<span class="sd">        either be the name of a colormap or an actual colormap instance.</span>
+<span class="sd">        By default, the color_map will be ``&quot;viridis&quot;``.</span>
+<span class="sd">    breaks : list, optional</span>
+<span class="sd">        List of value breaks to use for classifying the values of</span>
+<span class="sd">        `column` into the colors of `color_map`. Break values should be</span>
+<span class="sd">        provided in ascending order. Values of `column` that are below</span>
+<span class="sd">        the first break or above the last break will be shown in the</span>
+<span class="sd">        first and last classes, respectively. If not specified, the map</span>
+<span class="sd">        will be created using a Quantile classification scheme with 5</span>
+<span class="sd">        classes.</span>
+<span class="sd">    map_title : str, optional</span>
+<span class="sd">        Title to use for the map, by default ``None``.</span>
+<span class="sd">    legend_title : str, optional</span>
+<span class="sd">        Title to use for the legend, by default ``None``.</span>
+<span class="sd">    background_df : geopandas.geodataframe.GeoDataFrame, optional</span>
+<span class="sd">        Geodataframe to plot as background, behind ``data_df``. Expected</span>
+<span class="sd">        to have geometry type of ``Polygon`` or ``MultiPolygon``. A</span>
+<span class="sd">        common case would be to provide polygons representing the</span>
+<span class="sd">        landmass, country, or region that you are mapping as the</span>
+<span class="sd">        background.</span>
+
+<span class="sd">        Providing this layer has the side-effect of creating a</span>
+<span class="sd">        dropshadow for the whole map, so is generally recommended for</span>
+<span class="sd">        nicer styling of the output map. Configuration of the display of</span>
+<span class="sd">        this layer is not currently available to the user.</span>
+
+<span class="sd">        If set to ``None`` (default), no background layer will be</span>
+<span class="sd">        plotted.</span>
+
+<span class="sd">        If specified and ``extent`` is ``None``, the extent of this</span>
+<span class="sd">        dataframe will set the overall map extent.</span>
+<span class="sd">    boundaries_df : geopandas.geodataframe.GeoDataFrame, optional</span>
+<span class="sd">        Geodataframe to plot on the map ``data_df`` as boundaries.</span>
+<span class="sd">        Expected to have geometry type of ``Polygon`` or</span>
+<span class="sd">        ``MultiPolygon``. A common case would be to provide polygons for</span>
+<span class="sd">        states or other sub-regions of interest.</span>
+
+<span class="sd">        If set to ``None`` (default), no background layer will be</span>
+<span class="sd">        plotted.</span>
+<span class="sd">    extent : list or array-like, optional</span>
+<span class="sd">        Extent to zoom to for displaying the map. Should be of the</span>
+<span class="sd">        format: ``[xmin, ymin, xmax, ymax]`` in the CRS units of</span>
+<span class="sd">        `data_df`. By default, this is ``None``, which will result in</span>
+<span class="sd">        the extent of the map being set based on `background_df`</span>
+<span class="sd">        (if provided) or `data_df`.</span>
+<span class="sd">    boundaries_kwargs : dict, optional</span>
+<span class="sd">        Keyword arguments that can be used to configure display of the</span>
+<span class="sd">        boundaries layer. If not specified (=None), it will default to</span>
+<span class="sd">        use ``{&quot;linewidth&quot;: 0.75, &quot;zorder&quot;: 1, &quot;edgecolor&quot;: &quot;white&quot;}``,</span>
+<span class="sd">        which will result in thin white boundaries being plotted</span>
+<span class="sd">        underneath the data layer. To place these on top, change</span>
+<span class="sd">        ``zorder`` to ``2``. For other options, refer to</span>
+<span class="sd">        https://residentmario.github.io/geoplot/user_guide/Customizing_Plots.html</span>
+<span class="sd">        and https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.Polygon.html#matplotlib.patches.Polygon.</span>
+<span class="sd">    layer_kwargs : dict, optional</span>
+<span class="sd">        Optional styling to be applied to the data layer. By default</span>
+<span class="sd">        ``None``, which results in the layer being plotted using the</span>
+<span class="sd">        input breaks and colormap and no other changes. As an example,</span>
+<span class="sd">        you could change the edge color and line width of a polygon data</span>
+<span class="sd">        layer using by specifying</span>
+<span class="sd">        ``layer_kwargs={&quot;edgecolor&quot;: &quot;gray&quot;, &quot;linewidth&quot;: 0.5}``. Refer</span>
+<span class="sd">        to</span>
+<span class="sd">        https://residentmario.github.io/geoplot/user_guide/Customizing_Plots.html#Cosmetic-parameters</span>
+<span class="sd">        for other options.</span>
+<span class="sd">    legend_kwargs: dict, optional</span>
+<span class="sd">        Keyword arguments that can be used to configure display of the</span>
+<span class="sd">        legend. If not specified (=None), it will default to use</span>
+<span class="sd">        (``legend_kwargs={&quot;marker&quot;: &quot;s&quot;, &quot;frameon&quot;: False,</span>
+<span class="sd">        &quot;bbox_to_anchor&quot;: (1, 0.5), &quot;loc&quot;: &quot;center left&quot;}``).</span>
+<span class="sd">        For more information on the options available, refer to</span>
+<span class="sd">        https://residentmario.github.io/geoplot/user_guide/</span>
+<span class="sd">        Customizing_Plots.html#Legend.</span>
+<span class="sd">    projection: geoplot.projections, optional</span>
+<span class="sd">        Projection to use for creating the map. Default is</span>
+<span class="sd">        :meth:`geoplot.crs.AlbersEqualArea`.</span>
+<span class="sd">        For names of other options, refer to</span>
+<span class="sd">        https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html.</span>
+<span class="sd">    ax : cartopy.mpl.geoaxes.GeoAxes, optional</span>
+<span class="sd">        If specified, the map will be added to the specified existing</span>
+<span class="sd">        GeoAxes. If not specified (default), a new GeoAxes will be</span>
+<span class="sd">        created and returned.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    cartopy.mpl.geoaxes.GeoAxes</span>
+<span class="sd">        Plot object of the map.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NotImplementedError</span>
+<span class="sd">        A NotImplementedError will be raised if ``data_df`` does not</span>
+<span class="sd">        have a geometry type of ``Point``, ``Polygon``, or</span>
+<span class="sd">        ``MultiPolygon``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">scheme</span> <span class="o">=</span> <span class="n">_build_scheme</span><span class="p">(</span><span class="n">breaks</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">extent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">extent</span> <span class="o">=</span> <span class="n">background_df</span><span class="o">.</span><span class="n">total_bounds</span>
+
+    <span class="k">if</span> <span class="n">background_df</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">_build_background</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">background_df</span><span class="p">,</span> <span class="n">projection</span><span class="p">)</span>
+
+    <span class="n">input_geom_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data_df</span><span class="o">.</span><span class="n">geom_type</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">boundaries_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">boundaries_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>
+            <span class="s2">&quot;zorder&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">legend_kwargs</span> <span class="o">=</span> <span class="n">_build_legend_kwargs</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">legend_kwargs</span><span class="p">,</span> <span class="n">legend_title</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">input_geom_types</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;Point&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">layer_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">layer_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mf">1.25</span><span class="p">,</span> <span class="s2">&quot;linewidth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">gplt</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span>
+            <span class="n">data_df</span><span class="p">,</span>
+            <span class="n">hue</span><span class="o">=</span><span class="n">column</span><span class="p">,</span>
+            <span class="n">legend</span><span class="o">=</span><span class="n">legend</span><span class="p">,</span>
+            <span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">,</span>
+            <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
+            <span class="n">legend_kwargs</span><span class="o">=</span><span class="n">legend_kwargs</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">layer_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">input_geom_types</span> <span class="ow">in</span> <span class="p">([</span><span class="s2">&quot;Polygon&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;MultiPolygon&quot;</span><span class="p">]):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">gplt</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span>
+            <span class="n">data_df</span><span class="p">,</span>
+            <span class="n">hue</span><span class="o">=</span><span class="n">column</span><span class="p">,</span>
+            <span class="n">legend</span><span class="o">=</span><span class="n">legend</span><span class="p">,</span>
+            <span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">,</span>
+            <span class="n">projection</span><span class="o">=</span><span class="n">gplt</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(),</span>
+            <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
+            <span class="n">legend_kwargs</span><span class="o">=</span><span class="n">legend_kwargs</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">layer_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Mapping has not been implemented for input with &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;geometry types: </span><span class="si">{</span><span class="n">input_geom_types</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">boundaries_df</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gplt</span><span class="o">.</span><span class="n">polyplot</span><span class="p">(</span>
+            <span class="n">boundaries_df</span><span class="p">,</span>
+            <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+            <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">boundaries_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">legend</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">_fix_last_legend_entry</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend_title</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">map_title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">map_title</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_scheme</span><span class="p">(</span><span class="n">breaks</span><span class="p">,</span> <span class="n">data_df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct the map classification scheme for data breaks.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">breaks</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mc</span><span class="o">.</span><span class="n">Quantiles</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># ensure ascending order</span>
+    <span class="n">breaks</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="c1"># add inf as the last break to ensure consistent breaks between maps</span>
+    <span class="k">if</span> <span class="n">breaks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="n">breaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span>
+        <span class="n">scheme</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">UserDefined</span><span class="p">(</span><span class="n">data_df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">breaks</span><span class="p">)</span>
+
+    <span class="n">scheme</span><span class="o">.</span><span class="n">yb</span> <span class="o">=</span> <span class="n">YBFixedBounds</span><span class="p">(</span><span class="n">scheme</span><span class="o">.</span><span class="n">yb</span><span class="p">,</span> <span class="n">preset_max</span><span class="o">=</span><span class="n">scheme</span><span class="o">.</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">preset_min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">scheme</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_background</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">background_df</span><span class="p">,</span> <span class="n">projection</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render the background layer with drop shadow styling.&quot;&quot;&quot;</span>
+    <span class="n">drop_shadow_effects</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">SimpleLineShadow</span><span class="p">(</span>
+            <span class="n">shadow_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">SimpleLineShadow</span><span class="p">(</span>
+            <span class="n">shadow_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">Normal</span><span class="p">(),</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">gplt</span><span class="o">.</span><span class="n">polyplot</span><span class="p">(</span>
+        <span class="n">background_df</span><span class="p">,</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;#bdbdbd&quot;</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;#bdbdbd&quot;</span><span class="p">,</span>
+        <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+        <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+        <span class="n">path_effects</span><span class="o">=</span><span class="n">drop_shadow_effects</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_build_legend_kwargs</span><span class="p">(</span><span class="n">legend</span><span class="p">,</span> <span class="n">legend_kwargs</span><span class="p">,</span> <span class="n">legend_title</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble legend keyword arguments when legends are enabled.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">legend_kwargs</span> <span class="o">=</span> <span class="n">legend_kwargs</span> <span class="ow">or</span> <span class="p">{</span>
+        <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;frameon&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+        <span class="s2">&quot;loc&quot;</span><span class="p">:</span> <span class="s2">&quot;center left&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">legend_kwargs</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">legend_title</span>
+    <span class="k">return</span> <span class="n">legend_kwargs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_fix_last_legend_entry</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend_title</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adjust the final legend label to show an open-ended class.&quot;&quot;&quot;</span>
+    <span class="n">last_legend_label</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend_</span><span class="o">.</span><span class="n">texts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">new_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&gt; </span><span class="si">{</span><span class="n">last_legend_label</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; - &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">last_legend_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">new_label</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">legend_title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">legend_title</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Alliance for Energy Innovation, LLC and Root Geospatial LLC.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

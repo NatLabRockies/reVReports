@@ -1,0 +1,6 @@
+reVReports.utilities.plots.format\_graph
+========================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: format_graph

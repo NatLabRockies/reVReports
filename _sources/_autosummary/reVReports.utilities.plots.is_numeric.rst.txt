@@ -1,0 +1,6 @@
+reVReports.utilities.plots.is\_numeric
+======================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: is_numeric

@@ -1,0 +1,33 @@
+reVReports.exceptions
+=====================
+
+.. automodule:: reVReports.exceptions
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+   
+      reVReportsError
+      reVReportsKeyError
+      reVReportsTypeError
+      reVReportsValueError
+   
+   
+
+
+

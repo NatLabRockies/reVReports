@@ -1,0 +1,33 @@
+reVReports.maps.AutomaticallyStyledMapGenerator
+===============================================
+
+.. currentmodule:: reVReports.maps
+
+.. autoclass:: AutomaticallyStyledMapGenerator
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~AutomaticallyStyledMapGenerator.build_maps
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AutomaticallyStyledMapGenerator.map_layout
+      ~AutomaticallyStyledMapGenerator.n_cols
+      ~AutomaticallyStyledMapGenerator.n_rows
+      ~AutomaticallyStyledMapGenerator.num_scenarios
+   
+   

@@ -1,0 +1,6 @@
+reVReports.maps.generate\_maps\_from\_config
+============================================
+
+.. currentmodule:: reVReports.maps
+
+.. autofunction:: generate_maps_from_config

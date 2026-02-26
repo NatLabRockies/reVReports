@@ -1,0 +1,6 @@
+reVReports.utilities.plots.autoscale\_x
+=======================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: autoscale_x

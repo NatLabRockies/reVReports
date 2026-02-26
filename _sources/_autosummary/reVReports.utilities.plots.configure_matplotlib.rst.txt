@@ -1,0 +1,6 @@
+reVReports.utilities.plots.configure\_matplotlib
+================================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: configure_matplotlib

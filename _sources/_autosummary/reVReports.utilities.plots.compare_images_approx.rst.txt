@@ -1,0 +1,6 @@
+reVReports.utilities.plots.compare\_images\_approx
+==================================================
+
+.. currentmodule:: reVReports.utilities.plots
+
+.. autofunction:: compare_images_approx
